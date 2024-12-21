@@ -10,7 +10,7 @@ func _ready():
 		actions_queue.append(action)
 		
 func get_next_action():
-	var ret = actions_queue.pop_front()
-	actions_queue.append(ret)
+	var ret: Action = actions_queue.pop_front()
+	actions_queue.append(ret.duplicate())
 	return ret
 	
