@@ -6,20 +6,16 @@ class_name Action
 var current_wait: float 
 @export var has_animation:bool = false
 
+#TODO Redo the actions so that they have a on_update function, is_finished function etc
+# so that through inheritance we can just seamlessly extend the number of actions 
+
 func _init():
 	top_level = true
 	var current_wait = wait_after
-
-func get_copy():
-	var copy = Action.new()
-	copy.has_location = has_location
-	copy.wait_after = wait_after
-	copy.current_wait = current_wait
-	copy.has_animation = has_animation
-	copy.global_position = global_position
-	copy.position = position
-	return copy
 	
+func reset_action():
+	reset_timer()
+
 func reset_timer():
 	current_wait = 0.0
 	

@@ -38,7 +38,7 @@ script = ExtResource("4_7g8rp")
 wait_after = 2.0
 
 [node name="Location2" type="Marker3D" parent="InnocentCharacter/ActionPlan"]
-transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 5.18875, 0.681527, 18.0369)
+transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -13.176, 0.681527, 18.0369)
 top_level = true
 gizmo_extents = 0.93
 script = ExtResource("4_7g8rp")

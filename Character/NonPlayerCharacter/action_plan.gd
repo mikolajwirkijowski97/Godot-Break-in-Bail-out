@@ -1,6 +1,5 @@
 extends Node3D
 class_name ActionPlan
-
 var actions_queue: Array
 
 func _ready():
@@ -11,6 +10,8 @@ func _ready():
 		
 func get_next_action():
 	var ret: Action = actions_queue.pop_front()
-	actions_queue.append(ret.duplicate())
+	# Set action to default state as it mightve already expired
+	ret.reset_action()
+	actions_queue.append(ret)
 	return ret
 	
