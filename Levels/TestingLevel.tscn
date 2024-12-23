@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck7smfpwrumvp"]
+[gd_scene load_steps=9 format=3 uid="uid://ck7smfpwrumvp"]
 
 [ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/Character.tscn" id="1_a5qav"]
 [ext_resource type="Material" uid="uid://cfa2fgjnvjpbq" path="res://assets/Materials/Prototyping/DarkGrid.tres" id="2_3u2r3"]
 [ext_resource type="PackedScene" uid="uid://p78ar4qsulgi" path="res://Character/NonPlayerCharacter/NonPlayerCharacter.tscn" id="2_cc1l8"]
 [ext_resource type="Script" uid="uid://dx04ogjaku1m6" path="res://Character/NonPlayerCharacter/Actions/action_plan.gd" id="3_wvxjp"]
 [ext_resource type="Script" uid="uid://3r1igm6hulhf" path="res://Character/NonPlayerCharacter/Actions/travel_action.gd" id="4_fbu13"]
+[ext_resource type="Script" uid="uid://dkmq08aqr1gex" path="res://Character/NonPlayerCharacter/Actions/guard_position_action.gd" id="5_ncnre"]
 
 [sub_resource type="Environment" id="Environment_j2uja"]
 ambient_light_color = Color(0.727966, 0.847959, 0.951568, 1)
@@ -30,6 +31,14 @@ call_handle_input = false
 
 [node name="ActionPlan" type="Node3D" parent="InnocentCharacter"]
 script = ExtResource("3_wvxjp")
+
+[node name="GuardPositionAction" type="Marker3D" parent="InnocentCharacter/ActionPlan"]
+transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 4.92405, 0.681527, -0.710256)
+top_level = true
+gizmo_extents = 2.36
+script = ExtResource("5_ncnre")
+time = 3.0
+metadata/_custom_type_script = ExtResource("5_ncnre")
 
 [node name="TravelAction" type="Marker3D" parent="InnocentCharacter/ActionPlan"]
 transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 6.53657, 0.681526, 37.155)

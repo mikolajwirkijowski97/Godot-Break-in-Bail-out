@@ -6,7 +6,7 @@ class_name NonPlayerCharacter
 var current_action: Action
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
-var SPEED: float = 5.0
+var SPEED: float = 2.5
 
 func _ready():
 	_animation_tree = $AnimationTree
@@ -27,7 +27,6 @@ func _on_busy_state_physics_processing(delta):
 	if not current_action.is_finished(self):
 		current_action.on_update(self, delta)
 	else:
-		print("Start next action called")
 		start_next_action()
 
 func is_target_reached() -> bool:
@@ -40,21 +39,26 @@ func walk_towards_target(delta: float):
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
 	
-	_rotate_towards_direction(delta)
+	_rotate_towards_velocity(delta)
 	
-func _rotate_towards_direction(delta: float):
+func _rotate_towards_velocity(delta: float):
 	const look_towards_speed = 14
-	var min_velocity_rotation_cutoff: float = 0.2
+	var min_velocity_rotation_cutoff: float = 0.3
 	if velocity.length() > min_velocity_rotation_cutoff:
-		var look_direction = Vector2(velocity.z, velocity.x)
-		rotation.y = rotate_toward(rotation.y, \
-		look_direction.angle(), delta*look_towards_speed)
+		rotate_towards_direction(velocity, delta)
 
+func rotate_towards_direction(direction: Vector3, delta: float):
+	const look_towards_speed = 14
+	var flat_direction = Vector2(direction.z, direction.x) 
+	rotation.y = rotate_toward(rotation.y, \
+		flat_direction.angle(), delta*look_towards_speed)
+	
 func start_next_action():
 	state_chart.send_event("busy")
 
 	current_action = action_plan.get_next_action() 
 	current_action.start_action(self)
+	print("Starting another action: " + current_action.name)
 
 func set_navigation_target(target: Vector3):
 	navigation_agent.target_position = target

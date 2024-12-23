@@ -63,10 +63,10 @@ func on_player_left(_player):
 
 func _on_walk_state_physics_processing(delta):
 	var direction: Vector3 = _get_direction_from_input()
+	walk(direction, delta)	
 	if not direction and is_zero_approx(player.velocity.x + player.velocity.z)\
 		and state_chart:
 		state_chart.send_event("idle")
-	walk(direction, delta)	
 
 func _on_idle_state_physics_processing(delta):
 	if _get_direction_from_input() != Vector3.ZERO:
