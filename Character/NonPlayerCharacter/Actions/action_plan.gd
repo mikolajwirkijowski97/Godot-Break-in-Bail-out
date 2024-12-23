@@ -10,8 +10,6 @@ func _ready():
 		
 func get_next_action():
 	var ret: Action = actions_queue.pop_front()
-	# Set action to default state as it mightve already expired
-	ret.reset_action()
 	actions_queue.append(ret)
 	return ret
 	
