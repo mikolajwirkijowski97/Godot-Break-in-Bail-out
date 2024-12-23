@@ -1,5 +1,7 @@
 extends Node3D
 class_name ActionPlan
+
+@export var looping: bool = true
 var actions_queue: Array
 
 func _ready():
@@ -10,6 +12,7 @@ func _ready():
 		
 func get_next_action():
 	var ret: Action = actions_queue.pop_front()
-	actions_queue.append(ret)
+	if looping:
+		actions_queue.append(ret)
 	return ret
 	
