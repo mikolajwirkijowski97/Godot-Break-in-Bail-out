@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck7smfpwrumvp"]
+[gd_scene load_steps=10 format=3 uid="uid://ck7smfpwrumvp"]
 
 [ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/Character.tscn" id="1_a5qav"]
 [ext_resource type="Material" uid="uid://cfa2fgjnvjpbq" path="res://assets/Materials/Prototyping/DarkGrid.tres" id="2_3u2r3"]
 [ext_resource type="PackedScene" uid="uid://p78ar4qsulgi" path="res://Character/NonPlayerCharacter/NonPlayerCharacter.tscn" id="2_cc1l8"]
 [ext_resource type="Script" uid="uid://dx04ogjaku1m6" path="res://Character/NonPlayerCharacter/Actions/action_plan.gd" id="3_wvxjp"]
-[ext_resource type="Script" uid="uid://3r1igm6hulhf" path="res://Character/NonPlayerCharacter/Actions/travel_action.gd" id="4_fbu13"]
 [ext_resource type="Script" uid="uid://dkmq08aqr1gex" path="res://Character/NonPlayerCharacter/Actions/guard_position_action.gd" id="5_ncnre"]
+[ext_resource type="PackedScene" uid="uid://dqwimr1blytre" path="res://Levels/Areas/restricted_access_area.tscn" id="6_ncnre"]
 
 [sub_resource type="Environment" id="Environment_j2uja"]
 ambient_light_color = Color(0.727966, 0.847959, 0.951568, 1)
@@ -17,6 +17,9 @@ vertices = PackedVector3Array(6.03277, 1.04005, -0.870309, 6.08278, 1.04005, -9.
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(8, 0, 1), PackedInt32Array(7, 4, 10), PackedInt32Array(10, 4, 9), PackedInt32Array(13, 12, 11), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 1), PackedInt32Array(11, 1, 13), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 13), PackedInt32Array(17, 5, 16), PackedInt32Array(16, 5, 6), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(24, 23, 22), PackedInt32Array(16, 25, 17), PackedInt32Array(17, 25, 26), PackedInt32Array(19, 20, 22), PackedInt32Array(22, 20, 24), PackedInt32Array(18, 27, 21), PackedInt32Array(21, 27, 28), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(26, 25, 29), PackedInt32Array(29, 25, 31), PackedInt32Array(29, 31, 28), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(37, 36, 27), PackedInt32Array(27, 36, 30), PackedInt32Array(41, 40, 38), PackedInt32Array(38, 40, 39), PackedInt32Array(31, 43, 42), PackedInt32Array(41, 38, 44), PackedInt32Array(41, 44, 45), PackedInt32Array(45, 44, 46), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 46), PackedInt32Array(45, 46, 42), PackedInt32Array(42, 46, 31), PackedInt32Array(31, 46, 47), PackedInt32Array(31, 47, 28), PackedInt32Array(51, 50, 40), PackedInt32Array(40, 50, 39), PackedInt32Array(53, 52, 54), PackedInt32Array(54, 52, 55), PackedInt32Array(51, 56, 50), PackedInt32Array(50, 56, 57), PackedInt32Array(59, 58, 55), PackedInt32Array(57, 56, 52), PackedInt32Array(52, 56, 59), PackedInt32Array(52, 59, 55), PackedInt32Array(63, 62, 60), PackedInt32Array(60, 62, 61), PackedInt32Array(67, 66, 64), PackedInt32Array(64, 66, 65), PackedInt32Array(71, 70, 68), PackedInt32Array(68, 70, 69), PackedInt32Array(73, 72, 74), PackedInt32Array(74, 72, 75), PackedInt32Array(23, 24, 76), PackedInt32Array(76, 24, 77), PackedInt32Array(79, 78, 80), PackedInt32Array(80, 78, 81), PackedInt32Array(81, 78, 75), PackedInt32Array(71, 68, 80), PackedInt32Array(80, 68, 79), PackedInt32Array(77, 72, 76), PackedInt32Array(76, 72, 73), PackedInt32Array(74, 75, 82), PackedInt32Array(82, 75, 78), PackedInt32Array(82, 78, 83), PackedInt32Array(85, 84, 86), PackedInt32Array(86, 84, 87), PackedInt32Array(89, 88, 90), PackedInt32Array(90, 88, 92), PackedInt32Array(90, 92, 91), PackedInt32Array(93, 86, 87), PackedInt32Array(87, 94, 93), PackedInt32Array(93, 94, 95), PackedInt32Array(88, 89, 96), PackedInt32Array(94, 90, 95), PackedInt32Array(95, 90, 97), PackedInt32Array(97, 90, 91), PackedInt32Array(99, 98, 85), PackedInt32Array(85, 98, 84), PackedInt32Array(101, 100, 82), PackedInt32Array(99, 102, 98), PackedInt32Array(98, 102, 103), PackedInt32Array(105, 104, 83), PackedInt32Array(83, 104, 82), PackedInt32Array(103, 102, 104), PackedInt32Array(104, 102, 101), PackedInt32Array(104, 101, 82), PackedInt32Array(109, 108, 106), PackedInt32Array(106, 108, 107), PackedInt32Array(111, 110, 75), PackedInt32Array(75, 110, 112), PackedInt32Array(106, 113, 109), PackedInt32Array(109, 113, 114), PackedInt32Array(116, 115, 81), PackedInt32Array(113, 116, 114), PackedInt32Array(114, 116, 112), PackedInt32Array(112, 116, 81), PackedInt32Array(112, 81, 75), PackedInt32Array(118, 117, 108), PackedInt32Array(108, 117, 107), PackedInt32Array(119, 121, 120), PackedInt32Array(118, 122, 117), PackedInt32Array(117, 122, 123), PackedInt32Array(126, 125, 124), PackedInt32Array(123, 122, 124), PackedInt32Array(124, 122, 121), PackedInt32Array(124, 121, 126), PackedInt32Array(126, 121, 119), PackedInt32Array(130, 129, 127), PackedInt32Array(127, 129, 128), PackedInt32Array(134, 133, 131), PackedInt32Array(131, 133, 132), PackedInt32Array(136, 69, 135), PackedInt32Array(135, 69, 70), PackedInt32Array(139, 138, 137), PackedInt32Array(135, 140, 136), PackedInt32Array(136, 140, 141), PackedInt32Array(144, 143, 142), PackedInt32Array(141, 140, 137), PackedInt32Array(137, 140, 144), PackedInt32Array(137, 144, 142), PackedInt32Array(137, 142, 139), PackedInt32Array(148, 147, 145), PackedInt32Array(145, 147, 146), PackedInt32Array(149, 138, 150), PackedInt32Array(150, 138, 139), PackedInt32Array(152, 151, 143), PackedInt32Array(143, 151, 142), PackedInt32Array(156, 155, 153), PackedInt32Array(153, 155, 154), PackedInt32Array(158, 157, 159), PackedInt32Array(159, 157, 160), PackedInt32Array(156, 161, 155), PackedInt32Array(155, 161, 162), PackedInt32Array(160, 164, 163), PackedInt32Array(162, 161, 163), PackedInt32Array(163, 161, 159), PackedInt32Array(163, 159, 160)]
 cell_size = 0.05
 agent_radius = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1dcsj"]
+size = Vector3(67.445, 1.99, 46.015)
 
 [node name="TestingLevel" type="WorldEnvironment"]
 environment = SubResource("Environment_j2uja")
@@ -37,18 +40,7 @@ transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 4.92405, 0.681527, -
 top_level = true
 gizmo_extents = 2.36
 script = ExtResource("5_ncnre")
-time = 3.0
 metadata/_custom_type_script = ExtResource("5_ncnre")
-
-[node name="TravelAction" type="Marker3D" parent="InnocentCharacter/ActionPlan"]
-transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 6.53657, 0.681526, 37.155)
-top_level = true
-script = ExtResource("4_fbu13")
-
-[node name="TravelAction2" type="Marker3D" parent="InnocentCharacter/ActionPlan"]
-transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -11.6701, 0.681527, 16.433)
-top_level = true
-script = ExtResource("4_fbu13")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00547546, -0.835539, 0.549404, 0.00832673, 0.549431, 0.835498, -0.99995, -3.58056e-09, 0.00996569, 25.0481, 16.8892, 0)
@@ -146,4 +138,14 @@ operation = 2
 size = Vector3(1.73633, 3.48975, 1.87885)
 material = ExtResource("2_3u2r3")
 
+[node name="RestrictedAccessArea" parent="." instance=ExtResource("6_ncnre")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.21207, 5.31215)
+
+[node name="CollisionShape3D" parent="RestrictedAccessArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.48043, -3.64648, 17.867)
+shape = SubResource("BoxShape3D_1dcsj")
+debug_color = Color(0.980392, 0, 0.380392, 1)
+
 [connection signal="main_char_position_updated" from="MainChar" to="NavigationRegion3D/CSGCombiner3D/Floor" method="_on_main_char_main_char_position_updated"]
+
+[editable path="RestrictedAccessArea"]

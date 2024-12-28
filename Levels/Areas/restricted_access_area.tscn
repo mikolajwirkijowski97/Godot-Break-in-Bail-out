@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqwimr1blytre"]
+
+[ext_resource type="Script" uid="uid://byrsfgabuowq2" path="res://Levels/Areas/restricted_area.gd" id="1_gvjhr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wxw0f"]
+
+[node name="RestrictedAccessArea" type="Area3D"]
+script = ExtResource("1_gvjhr")
+area_access = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_wxw0f")
