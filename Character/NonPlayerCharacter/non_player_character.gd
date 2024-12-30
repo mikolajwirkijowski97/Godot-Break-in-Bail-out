@@ -11,8 +11,7 @@ var SPEED: float = 2.5
 func _ready():
 	_animation_tree = $AnimationTree
 	call_deferred("start_next_action")
-
-
+	
 func _physics_process(delta: float):
 	# set the velocity in the animation tree, so it can blend between animations
 	#TODO: If animations get more complex, this CANNOT be the default approach
@@ -20,7 +19,6 @@ func _physics_process(delta: float):
 		_animation_tree["parameters/Movement/blend_position"] = \
 		velocity.length() / SPEED - 1
 		
-	$CSGSphere3D.global_position = navigation_agent.get_next_path_position()
 	move_and_slide()
 
 func _on_busy_state_physics_processing(delta):
