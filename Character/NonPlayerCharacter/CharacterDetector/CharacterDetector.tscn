@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3oaq425f1ip"]
+
+[ext_resource type="Script" uid="uid://boy3ls8r3loh" path="res://Character/NonPlayerCharacter/CharacterDetector/LineOfSightCollisionShape.gd" id="1_svl35"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_svl35"]
+points = PackedVector3Array(0, 0, 0, 50.005, 0, -54.5709, 50.005, 0, 54.5709, 0, 2, 0, 50.005, 2, -54.5709, 50.005, 2, 54.5709)
+
+[node name="CharacterDetector" type="Node3D"]
+
+[node name="LineOfSightDetector" type="Node3D" parent="."]
+
+[node name="LineOfSight" type="Area3D" parent="LineOfSightDetector"]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LineOfSightDetector/LineOfSight"]
+shape = SubResource("ConvexPolygonShape3D_svl35")
+debug_color = Color(0, 0.651024, 0.0364057, 1)
+script = ExtResource("1_svl35")
+angle = 1.65806
+distance = 50.005
