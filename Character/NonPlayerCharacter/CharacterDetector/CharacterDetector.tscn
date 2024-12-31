@@ -1,20 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3oaq425f1ip"]
+[gd_scene load_steps=5 format=3 uid="uid://c3oaq425f1ip"]
 
+[ext_resource type="Script" uid="uid://db2rq4xgwcxf6" path="res://Character/NonPlayerCharacter/CharacterDetector/character_detector.gd" id="1_cya2y"]
+[ext_resource type="Script" uid="uid://cbmqh86nyrt2p" path="res://Character/NonPlayerCharacter/CharacterDetector/line_of_sight_detector.gd" id="1_kpnh1"]
 [ext_resource type="Script" uid="uid://boy3ls8r3loh" path="res://Character/NonPlayerCharacter/CharacterDetector/LineOfSightCollisionShape.gd" id="1_svl35"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_svl35"]
-points = PackedVector3Array(0, 0, 0, 50.005, 0, -54.5709, 50.005, 0, 54.5709, 0, 2, 0, 50.005, 2, -54.5709, 50.005, 2, 54.5709)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cya2y"]
+points = PackedVector3Array(0, 0, 0, -54.5709, 0, 50.005, 54.5709, 0, 50.005, 0, 2, 0, -54.5709, 2, 50.005, 54.5709, 2, 50.005)
 
 [node name="CharacterDetector" type="Node3D"]
+script = ExtResource("1_cya2y")
 
 [node name="LineOfSightDetector" type="Node3D" parent="."]
+script = ExtResource("1_kpnh1")
 
 [node name="LineOfSight" type="Area3D" parent="LineOfSightDetector"]
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LineOfSightDetector/LineOfSight"]
-shape = SubResource("ConvexPolygonShape3D_svl35")
+[node name="VisionTriangle" type="CollisionShape3D" parent="LineOfSightDetector/LineOfSight"]
+shape = SubResource("ConvexPolygonShape3D_cya2y")
 debug_color = Color(0, 0.651024, 0.0364057, 1)
 script = ExtResource("1_svl35")
-angle = 1.65806
+angle_deg = null
 distance = 50.005
+
+[connection signal="character_in_line_of_sight" from="LineOfSightDetector" to="." method="_on_line_of_sight_detector_character_in_line_of_sight"]
+[connection signal="body_entered" from="LineOfSightDetector/LineOfSight" to="LineOfSightDetector" method="_on_line_of_sight_body_entered"]

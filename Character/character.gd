@@ -4,7 +4,11 @@ class_name Character
 @onready var _state_chart: StateChart = $StateChart
 @onready var _animation_tree: AnimationTree = $AnimationTree
 @onready var _animation_state_machine: AnimationNodeStateMachinePlayback = _animation_tree.get("parameters/playback")
+# Should the character handle the game controls initialisation(use only if no game object does it)
 @export var call_handle_input: bool = true
+
+# The height at which this character receives detection raycasts
+@export var detection_height: float = 4.5
 
 signal main_char_position_updated(position)
 

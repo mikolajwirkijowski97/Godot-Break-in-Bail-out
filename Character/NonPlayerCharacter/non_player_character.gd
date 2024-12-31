@@ -62,3 +62,7 @@ func set_navigation_target(target: Vector3):
 
 func _on_ledge_detector_bump_encountered():
 	velocity.y += 1
+
+
+func _on_character_detector_character_detected(char: Character) -> void:
+	print("I see you " + str(char))
