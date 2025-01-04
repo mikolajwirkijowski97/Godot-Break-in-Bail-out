@@ -57,12 +57,20 @@ func start_next_action():
 	current_action.start_action(self)
 	print("Starting another action: " + current_action.name)
 
+
 func set_navigation_target(target: Vector3):
 	navigation_agent.target_position = target
+
 
 func _on_ledge_detector_bump_encountered():
 	velocity.y += 1
 
 
 func _on_character_detector_character_detected(char: Character) -> void:
-	print("I see you " + str(char))
+	print("Received signal detected")
+	$CharacterDetector/VisionTriangle.debug_color = Color.RED
+
+
+func _on_character_detector_character_undetected(char: Character) -> void:
+	print("Received signal undetected")
+	$CharacterDetector/VisionTriangle.debug_color = Color.GREEN
