@@ -24,10 +24,10 @@ agent_radius = 0.6
 environment = SubResource("Environment_j2uja")
 
 [node name="PlayerChar" parent="." instance=ExtResource("1_a5qav")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 1.4512, -6.87743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4512, -6.87743)
 
 [node name="InnocentCharacter" parent="." node_paths=PackedStringArray("action_plan") instance=ExtResource("2_cc1l8")]
-transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 22.8734, 1.9551, -6.86498)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8734, 1.9551, -6.86498)
 action_plan = NodePath("ActionPlan")
 call_handle_input = false
 

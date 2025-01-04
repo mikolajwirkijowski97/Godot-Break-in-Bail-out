@@ -2,7 +2,8 @@
 extends CollisionShape3D
 
 const semi_circle_point_count = 3
-var angle_rad: float = PI
+var angle_rad: float = PI / 2
+
 @export var angle_deg: float = 95.0:
 	set(value):
 		const max_deg_value = 170

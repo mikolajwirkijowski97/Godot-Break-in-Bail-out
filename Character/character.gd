@@ -8,7 +8,7 @@ class_name Character
 @export var call_handle_input: bool = true
 
 # The height at which this character receives detection raycasts
-@export var detection_height: float = 4.5
+@export var detection_height: float = 1
 
 signal main_char_position_updated(position)
 

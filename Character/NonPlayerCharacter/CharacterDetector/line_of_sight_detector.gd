@@ -34,8 +34,9 @@ func set_detection(character: PlayerCharacter, detection: bool) -> void:
 		to_emit.emit(character)
 		
 # Is the sightline between detector and body clear
-func is_view_clear(body: Node3D) -> bool:
-	raycast.target_position = to_local(body.global_position)
+func is_view_clear(body: PlayerCharacter) -> bool:
+	var vertical_offset: Vector3 = Vector3.UP * body.detection_height
+	raycast.target_position = to_local(body.global_position + vertical_offset)
 	raycast.force_raycast_update()
 	
 	var collider = raycast.get_collider()
