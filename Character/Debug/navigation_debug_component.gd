@@ -7,5 +7,5 @@ func _init() -> void:
 	red_material.albedo_color = Color.RED
 	material = red_material
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_position = nav.get_next_path_position()

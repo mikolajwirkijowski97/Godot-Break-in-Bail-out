@@ -14,7 +14,7 @@ var has_device: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	PlayerDeviceManager.player_joined.connect(on_player_joined)
 	PlayerDeviceManager.player_left.connect(on_player_left)
 	
@@ -28,16 +28,19 @@ func _get_direction_from_input() -> Vector3:
 	var direction = Vector3(-dir_x, 0, dir_z).normalized()
 	return direction
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float) -> void: 
 	# set the velocity in the animation tree, so it can blend between animations
 	if animation_tree:
 		animation_tree["parameters/Movement/blend_position"] = \
 		player.velocity.length() / SPEED - 1
 
-func walk(direction: Vector3, _delta: float):
+func walk(direction: Vector3, _delta: float) -> void:
 	const look_towards_speed = 14
 	const slow_down_speed = 40
 	# Set velocity to walk or slow down
+	# TODO: this can be more neat by using multiplication instead of this weird iteration
+	# TODO: Break up into functions
+	# FIX: Character gets stuck walking sometimes when receiving diagonal input(forward|backward + left|right)
 	for i in 3:
 		if direction[i]:
 			player.velocity[i] = direction[i] * SPEED
@@ -50,25 +53,26 @@ func walk(direction: Vector3, _delta: float):
 		player.rotation.y = rotate_toward(player.rotation.y, \
 		look_direction.angle(), _delta*look_towards_speed)
 		
-func on_player_joined(_player):
+func on_player_joined(_player: int) -> void:
 	if not has_device and _player == p_id:
 		print_debug("Device: "+str(_player)+" joined")
 		has_device = true
 		device = PlayerDeviceManager.get_player_device(_player)
 
-func on_player_left(_player):
+func on_player_left(_player: int) -> void:
 	print_debug("Device: "+str(_player)+" left")
 	if _player == p_id:
 		has_device = false
 
-func _on_walk_state_physics_processing(delta):
+# TODO: Create an enumaration for events, they cant just be loose strings like that, that's atrocious
+func _on_walk_state_physics_processing(delta: float) -> void:
 	var direction: Vector3 = _get_direction_from_input()
 	walk(direction, delta)	
 	if not direction and is_zero_approx(player.velocity.x + player.velocity.z)\
 		and state_chart:
 		state_chart.send_event("idle")
 
-func _on_idle_state_physics_processing(delta):
+func _on_idle_state_physics_processing(_delta: float) -> void:
 	if _get_direction_from_input() != Vector3.ZERO:
 		state_chart.send_event("walk")
 		

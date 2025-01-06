@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://cbmqh86nyrt2p" path="res://Character/NonPlayerCharacter/CharacterDetector/line_of_sight_detector.gd" id="1_q7kom"]
 [ext_resource type="Script" uid="uid://boy3ls8r3loh" path="res://Character/NonPlayerCharacter/CharacterDetector/LineOfSightCollisionShape.gd" id="2_a5juh"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cya2y"]
-points = PackedVector3Array(0, 0, 0, -50.005, 0, 3.06192e-15, -6.12385e-15, 0, -50.005, 50.005, 0, -9.18577e-15, 0, 2, 0, -50.005, 2, 3.06192e-15, -6.12385e-15, 2, -50.005, 50.005, 2, -9.18577e-15)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q7kom"]
+points = PackedVector3Array(0, 0, 0, -35.3589, 0, 35.3589, 0, 0, 50.005, 35.3589, 0, 35.3589, 0, 2, 0, -35.3589, 2, 35.3589, 0, 2, 50.005, 35.3589, 2, 35.3589)
 
 [node name="VisualDetector" type="Area3D"]
 script = ExtResource("1_q7kom")
 
 [node name="VisionTriangle" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_cya2y")
+shape = SubResource("ConvexPolygonShape3D_q7kom")
 debug_color = Color(0, 0.651024, 0.0364057, 1)
 script = ExtResource("2_a5juh")
 distance = 50.005

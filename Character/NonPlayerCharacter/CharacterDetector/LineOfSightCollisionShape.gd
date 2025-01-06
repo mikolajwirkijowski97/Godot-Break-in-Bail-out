@@ -22,17 +22,17 @@ var angle_rad: float = PI / 2
 
 var height: float = 2.0
 
-func _update_los():
+func _update_los() -> void:
 	var new_los_mesh_shape: ConvexPolygonShape3D = ConvexPolygonShape3D.new()
 	new_los_mesh_shape.points =_construct_los_mesh_points()
 	shape = new_los_mesh_shape
 
-func _construct_los_mesh_points() -> Array:
-	var lower_points= _get_los_semi_circle(semi_circle_point_count)
-	var upper_points = lower_points.map(\
-	func(n): return n + Vector3.UP*height)
+func _construct_los_mesh_points() -> Array[Vector3]:
+	var lower_points: Array[Vector3] = _get_los_semi_circle(semi_circle_point_count)
+	var upper_points: Array = lower_points.map(\
+	func(n) -> Vector3: return n + Vector3.UP*height)
 
-	var mesh_points: Array = []
+	var mesh_points: Array[Vector3] = []
 	mesh_points.append_array(lower_points)
 	mesh_points.append_array(upper_points)
 	return mesh_points
@@ -42,9 +42,9 @@ func circumference_point(point_angle_rad:float) -> Vector3:
 	var los_x_offset: float = distance * cos(point_angle_rad)
 	return Vector3(los_y_offset, 0, los_x_offset)
 
-func _get_los_semi_circle(circumference_points: int) -> Array:
+func _get_los_semi_circle(circumference_points: int) -> Array[Vector3]:
 	# First point is the origin
-	var semi_circle_points: Array = [Vector3.ZERO]
+	var semi_circle_points: Array[Vector3] = [Vector3.ZERO]
 	# The other n points are the circumference
 	for n in circumference_points:
 		var weight: float = float(n)/(circumference_points - 1.)

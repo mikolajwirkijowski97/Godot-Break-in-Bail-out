@@ -5,7 +5,7 @@ var player_data: Dictionary = {}
 signal player_joined(player)
 signal player_left(player)
 
-func join(device: int):
+func join(device: int) -> void:
 	var player = next_player()
 	print_debug("Join player: "+str(player))
 	if player >= 0:
@@ -17,13 +17,13 @@ func join(device: int):
 		player_joined.emit(player)
 
 # call from outside
-func handle_join_input():
+func handle_join_input() -> void:
 	for device in get_unjoined_devices():
 		if MultiplayerInput.is_action_just_pressed(device, "join"):
 			join(device)
 			
 			
-func get_unjoined_devices():
+func get_unjoined_devices() -> Array[int]:
 	var devices = Input.get_connected_joypads()
 	# also consider keyboard player
 	devices.append(-1)

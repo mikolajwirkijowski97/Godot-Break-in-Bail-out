@@ -12,14 +12,14 @@ class_name Character
 
 signal main_char_position_updated(position)
 
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	if(velocity):
 		main_char_position_updated.emit(global_position)
 	move_and_slide()
 
-func _process(delta):
+func _process(_delta: float) -> void:
 	if call_handle_input:
 		PlayerDeviceManager.handle_join_input()
 
-func _on_ledge_detector_bump_encountered():
+func _on_ledge_detector_bump_encountered() -> void:
 	position.y += 0.03

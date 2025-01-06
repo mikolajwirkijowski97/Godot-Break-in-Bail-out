@@ -1,6 +1,6 @@
 extends Node
 
-const AREAS: Dictionary = {
+const AREAS: Dictionary[String, int] = {
 	"Everyone": 1,
 	"Workers": 2,
 	"Vip": 4,
