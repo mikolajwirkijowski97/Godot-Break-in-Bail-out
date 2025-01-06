@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj61iyr8f743t"]
+
+[ext_resource type="Script" uid="uid://cir28av1yfr4l" path="res://Character/Debug/navigation_debug_component.gd" id="1_1nuav"]
+
+[node name="NavigationDebugComponent" type="CSGSphere3D"]
+script = ExtResource("1_1nuav")
