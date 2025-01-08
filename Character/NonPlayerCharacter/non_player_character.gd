@@ -62,10 +62,11 @@ func _on_ledge_detector_bump_encountered() -> void:
 	velocity.y += 1
 
 func _on_character_detector_character_detected(_char: Character) -> void:
-	print("Received signal detected")
-	$CharacterDetector/VisionTriangle.debug_color = Color.RED
-
+	if OS.is_debug_build():
+		print("Received signal detected")
+		$CharacterDetector/VisionTriangle.debug_color = Color.RED
 
 func _on_character_detector_character_undetected(_char: Character) -> void:
-	print("Received signal undetected")
-	$CharacterDetector/VisionTriangle.debug_color = Color.GREEN
+	if OS.is_debug_build():
+		print("Received signal undetected")
+		$CharacterDetector/VisionTriangle.debug_color = Color.GREEN

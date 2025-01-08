@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://be3pk2ymoii8t"]
+
+[ext_resource type="Script" uid="uid://b6t2od1wny1bv" path="res://Character/CharacterComponents/bumper_component.gd" id="1_ut0e7"]
+
+[node name="BumperComponent" type="RayCast3D"]
+target_position = Vector3(0, 0, 0.39)
+script = ExtResource("1_ut0e7")
