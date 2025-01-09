@@ -3,6 +3,8 @@ class_name NonPlayerCharacter
 
 @export var action_plan: ActionPlan
 @export var state_chart: StateChart
+@export var npc_type: NpcType
+
 var current_action: Action
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
@@ -21,6 +23,10 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_busy_state_physics_processing(delta: float) -> void:
+	if npc_type:
+		npc_type.on_busy_update(self, delta)
+
+func process_actions(delta: float) -> void:
 	if not current_action.is_finished(self):
 		current_action.on_update(self, delta)
 	else:
@@ -51,7 +57,6 @@ func rotate_towards_direction(direction: Vector3, delta: float) -> void:
 	
 func start_next_action() -> void:
 	state_chart.send_event("busy")
-
 	current_action = action_plan.get_next_action() 
 	current_action.start_action(self)
 
@@ -60,13 +65,3 @@ func set_navigation_target(target: Vector3) -> void:
 
 func _on_ledge_detector_bump_encountered() -> void:
 	velocity.y += 1
-
-func _on_character_detector_character_detected(_char: Character) -> void:
-	if OS.is_debug_build():
-		print("Received signal detected")
-		$CharacterDetector/VisionTriangle.debug_color = Color.RED
-
-func _on_character_detector_character_undetected(_char: Character) -> void:
-	if OS.is_debug_build():
-		print("Received signal undetected")
-		$CharacterDetector/VisionTriangle.debug_color = Color.GREEN

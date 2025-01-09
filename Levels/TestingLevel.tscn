@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck7smfpwrumvp"]
+[gd_scene load_steps=12 format=3 uid="uid://ck7smfpwrumvp"]
 
 [ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/PlayerCharacter.tscn" id="1_a5qav"]
 [ext_resource type="Material" uid="uid://cfa2fgjnvjpbq" path="res://assets/Materials/Prototyping/DarkGrid.tres" id="2_3u2r3"]
 [ext_resource type="PackedScene" uid="uid://p78ar4qsulgi" path="res://Character/NonPlayerCharacter/NonPlayerCharacter.tscn" id="2_cc1l8"]
 [ext_resource type="Script" uid="uid://dx04ogjaku1m6" path="res://Character/NonPlayerCharacter/Actions/action_plan.gd" id="3_wvxjp"]
+[ext_resource type="Script" uid="uid://da4oi0p8f2gyj" path="res://Character/NonPlayerCharacter/Types/guard_type.gd" id="5_1dcsj"]
 [ext_resource type="Script" uid="uid://dkmq08aqr1gex" path="res://Character/NonPlayerCharacter/Actions/guard_position_action.gd" id="5_ncnre"]
 [ext_resource type="PackedScene" uid="uid://dqwimr1blytre" path="res://Levels/Areas/restricted_access_area.tscn" id="6_ncnre"]
 
@@ -18,7 +19,11 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Arr
 cell_size = 0.05
 agent_radius = 0.6
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1dcsj"]
+size = Vector3(70, 1, 50)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ncnre"]
+size = Vector3(3, 2, 4)
 
 [node name="TestingLevel" type="WorldEnvironment"]
 environment = SubResource("Environment_j2uja")
@@ -26,20 +31,25 @@ environment = SubResource("Environment_j2uja")
 [node name="PlayerChar" parent="." instance=ExtResource("1_a5qav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4512, -6.87743)
 
-[node name="InnocentCharacter" parent="." node_paths=PackedStringArray("action_plan") instance=ExtResource("2_cc1l8")]
+[node name="Guard" parent="." node_paths=PackedStringArray("action_plan", "npc_type") instance=ExtResource("2_cc1l8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8734, 1.9551, -6.86498)
 action_plan = NodePath("ActionPlan")
+npc_type = NodePath("GuardType")
 call_handle_input = false
 
-[node name="ActionPlan" type="Node3D" parent="InnocentCharacter"]
+[node name="ActionPlan" type="Node3D" parent="Guard"]
 script = ExtResource("3_wvxjp")
 
-[node name="GuardPositionAction" type="Marker3D" parent="InnocentCharacter/ActionPlan"]
+[node name="GuardPositionAction" type="Marker3D" parent="Guard/ActionPlan"]
 transform = Transform3D(0.317849, 0, 0.258982, 0, 0.41, 0, -0.258982, 0, 0.317849, 4.92405, 0.681527, -0.42848)
 top_level = true
 gizmo_extents = 2.36
 script = ExtResource("5_ncnre")
 metadata/_custom_type_script = ExtResource("5_ncnre")
+
+[node name="GuardType" type="Node" parent="Guard"]
+script = ExtResource("5_1dcsj")
+metadata/_custom_type_script = ExtResource("5_1dcsj")
 
 [node name="Sunlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00547546, -0.835539, 0.549404, 0.00832673, 0.549431, 0.835498, -0.99995, -3.58056e-09, 0.00996569, 25.0481, 16.8892, 0)
@@ -142,12 +152,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51076, 1.34024, -3.61858)
 size = Vector3(2.94727, 1.4386, 1)
 material = ExtResource("2_3u2r3")
 
-[node name="RestrictedAccessArea" parent="." instance=ExtResource("6_ncnre")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.21207, 5.31215)
+[node name="WorkersOnlyArea" parent="." instance=ExtResource("6_ncnre")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18153, 5.31215)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RestrictedAccessArea"]
+[node name="MainArea" type="CollisionShape3D" parent="WorkersOnlyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98922, 0.499999, 19.6745)
+shape = SubResource("BoxShape3D_1dcsj")
+debug_color = Color(1, 0, 0, 1)
+
+[node name="EntranceGuard" type="CollisionShape3D" parent="WorkersOnlyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.70822, 0.499999, -4.67849)
 shape = SubResource("BoxShape3D_ncnre")
+debug_color = Color(1, 0, 0, 1)
 
 [connection signal="main_char_position_updated" from="PlayerChar" to="NavigationRegion3D/CSGCombiner3D/Floor" method="_on_main_char_main_char_position_updated"]
 
-[editable path="RestrictedAccessArea"]
+[editable path="WorkersOnlyArea"]
