@@ -4,9 +4,6 @@ class_name GuardPositionAction
 @export var time: float  = 0.0
 var timer: float = 0.0
 
-func _init():
-	top_level = true
-
 func on_update(npc: NonPlayerCharacter, _delta:float) -> void:
 	npc.walk_towards_target(_delta)
 	if npc.is_target_reached():

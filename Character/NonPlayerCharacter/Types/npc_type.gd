@@ -1,6 +1,12 @@
 extends Node
 class_name NpcType
 
+const groups: Array[String] = ["npcs"]
+
+func _init():
+	for group in groups:
+		add_to_group(group)
+
 # Follow the sandbox pattern, keep all methods in NonPlayerCharacter
 # and just call them from here!
 func on_hostile_update(_npc: NonPlayerCharacter, _delta: float) -> void:
