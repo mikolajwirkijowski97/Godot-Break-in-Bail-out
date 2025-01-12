@@ -5,17 +5,10 @@ class_name NonPlayerCharacter
 @export var state_chart: StateChart
 @export var npc_type: NpcType
 @export var character_detector: CharacterDetector
-
 var current_action: Action
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 var SPEED: float = 2.5
-
-
-func _ready():
-	_animation_tree = $AnimationTree
-	call_deferred("start_next_action")
-
 
 func _physics_process(_delta: float) -> void:
 	# set the velocity in the animation tree, so it can blend between animations
@@ -37,10 +30,11 @@ func _on_suspicious_state_processing(delta: float) -> void:
 
 
 func process_actions(delta: float) -> void:
-	if not current_action.is_finished(self):
+	if current_action and not current_action.is_finished(self):
 		current_action.on_update(self, delta)
 	else:
 		start_next_action()
+
 
 func start_next_action() -> void:
 	state_chart.send_event("busy")

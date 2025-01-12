@@ -12,6 +12,9 @@ class_name Character
 
 signal main_char_position_updated(position)
 
+func _ready():
+	_animation_tree.active = true
+	
 func _physics_process(_delta: float) -> void:
 	if(velocity):
 		main_char_position_updated.emit(global_position)

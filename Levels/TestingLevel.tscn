@@ -23,7 +23,7 @@ agent_radius = 0.6
 size = Vector3(70, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ncnre"]
-size = Vector3(3, 2, 4)
+size = Vector3(1.93335, 2, 0.97876)
 
 [node name="TestingLevel" type="WorldEnvironment"]
 environment = SubResource("Environment_j2uja")
@@ -36,7 +36,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8734, 1.9551, -6.86498)
 action_plan = NodePath("ActionPlan")
 npc_type = NodePath("GuardType")
 call_handle_input = false
-detection_height = 1.0
 
 [node name="ActionPlan" type="Node3D" parent="Guard"]
 script = ExtResource("3_wvxjp")
@@ -162,7 +161,7 @@ shape = SubResource("BoxShape3D_1dcsj")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="EntranceGuard" type="CollisionShape3D" parent="WorkersOnlyArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.70822, 0.499999, -4.67849)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14442, 0.499999, -5.38475)
 shape = SubResource("BoxShape3D_ncnre")
 debug_color = Color(1, 0, 0, 1)
 
