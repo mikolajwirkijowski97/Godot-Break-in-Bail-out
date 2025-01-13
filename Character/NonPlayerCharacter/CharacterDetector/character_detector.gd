@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	var overlapping_chars = get_overlapping_bodies().filter(\
 	func(x): return x is PlayerCharacter)
 	
-	# Set detection for overlapping chars if no  obstacles between
+	# Set visibility for overlapping chars if no  obstacles between
 	for _char in overlapping_chars:
 		_set_visibility(_char, _is_view_clear(_char), delta)
 	
@@ -30,9 +30,8 @@ func _physics_process(delta: float) -> void:
 		if _char not in overlapping_chars:
 			_set_visibility(_char, false, delta)
 
-# TODO Make a getter for a player caught red handed, so that
-# an NPC can retrieve such a player for whatever reason
-
+func get_caught_players():
+	return detection_status.keys().filter(func (x): detection_status[x].caught_red_handed)
 
 func _set_visibility(player: PlayerCharacter, visibility: bool, delta: float) -> void:
 	var to_emit: Signal = character_detected if visibility else character_undetected
