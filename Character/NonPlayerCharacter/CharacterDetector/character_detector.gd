@@ -27,9 +27,12 @@ func _physics_process(delta: float) -> void:
 	
 	# Set detection for possibly non overlapping chars
 	for _char in detection_status.keys():
-		_set_trespassing(_char, delta)
 		if _char not in overlapping_chars:
 			_set_visibility(_char, false, delta)
+
+# TODO Make a getter for a player caught red handed, so that
+# an NPC can retrieve such a player for whatever reason
+
 
 func _set_visibility(player: PlayerCharacter, visibility: bool, delta: float) -> void:
 	var to_emit: Signal = character_detected if visibility else character_undetected
@@ -52,8 +55,6 @@ func _set_visibility(player: PlayerCharacter, visibility: bool, delta: float) ->
 	if detection_status[player].last_seen_timer < VISIBILITY_BUFFER_TIME:
 		detection_status[player].last_seen_location = player.global_position
 
-
-
 # Is the sightline between detector and body clear
 func _is_view_clear(body: PlayerCharacter) -> bool:
 	var vertical_offset: Vector3 = Vector3.UP * body.detection_height
@@ -64,13 +65,13 @@ func _is_view_clear(body: PlayerCharacter) -> bool:
 	return collider == body
 
 
-func get_detection_status(body: PlayerCharacter):
-	return detection_status.has(body) and \
-		detection_status[body]
+func get_detection_status(body: PlayerCharacter) ->  CharacterDetectionStatus:
+	return detection_status[body] if detection_status.has(body) else null
 
-# TODO WARNING HACK: Why the hell is this running for every NPC, thats a waste
-# if ive ever seen one
-func _set_trespassing(player: PlayerCharacter, delta: float):
+func b_is_visible(player: PlayerCharacter) -> bool:
+	return detection_status[player].is_visible
+
+func is_trespassing(player: PlayerCharacter, delta: float):
 	var all_areas = get_tree().get_nodes_in_group("Areas")
 	var not_trespassing_timer = detection_status[player].not_trespassing_timer
 	var trespassing_areas = all_areas.filter(
@@ -90,7 +91,7 @@ func _set_trespassing(player: PlayerCharacter, delta: float):
 	else:
 		detection_status[player].not_trespassing_timer = 0
 
-	detection_status[player].is_trespassing = in_trespassing_area and \
+	return in_trespassing_area and \
 	not_trespassing_timer < detection_status[player].trespassing_buffer_time
 	
 	

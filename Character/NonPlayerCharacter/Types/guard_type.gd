@@ -12,7 +12,7 @@ func on_busy_update(_npc: NonPlayerCharacter, _delta: float) -> void:
 	
 func on_suspicious_update(_npc: NonPlayerCharacter, _delta: float) -> void:
 	# Warn off the player
-	_npc.set_navigation_to_trespassing_detection_point(_delta)
+	_npc.follow_trespassers(_delta)
 	_npc.walk_towards_target(_delta)
 
 func on_alerted_update(_npc: NonPlayerCharacter, _delta: float) -> void:

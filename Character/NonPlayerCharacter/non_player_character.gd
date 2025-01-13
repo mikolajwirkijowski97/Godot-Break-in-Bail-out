@@ -80,11 +80,12 @@ func guard_area(delta: float) -> void:
 	
 	# Check if anyone is trespassing
 	for player in character_detector.detection_status:
-		var detection = character_detector.detection_status[player]
-		if detection and player.is_trespassing(delta ):
+		var detection: bool = character_detector.b_is_visible(player)
+		var trespassing: bool = character_detector.is_trespassing(player, delta)
+		if detection and trespassing:
 			state_chart.send_event("get_suspicious")
 
-func set_navigation_to_trespassing_detection_point(delta: float) -> void:
+func follow_trespassers(delta: float) -> void:
 	if not character_detector:
 		return
 
@@ -92,7 +93,7 @@ func set_navigation_to_trespassing_detection_point(delta: float) -> void:
 	var closest_distance: float
 
 	for player: PlayerCharacter in character_detector.detection_status.keys():
-		if not player.is_trespassing(delta):
+		if not character_detector.is_trespassing(player, delta):
 			continue
 	
 		var detection_location: Vector3 = character_detector.detection_status[player].last_seen_location
