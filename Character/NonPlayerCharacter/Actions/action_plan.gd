@@ -3,6 +3,7 @@ class_name ActionPlan
 
 @export var looping: bool = true
 var actions_queue: Array[Action]
+var current_action: Action
 
 func _ready() -> void:
 	for action in get_children():

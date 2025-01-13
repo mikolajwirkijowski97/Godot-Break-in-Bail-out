@@ -5,7 +5,8 @@ signal character_detected(_char: PlayerCharacter)
 signal character_undetected(_char: PlayerCharacter)
 
 # Whether a character is currently detected or not.
-var detection_status: Dictionary[PlayerCharacter, bool] = {}
+var detection_status: Dictionary[PlayerCharacter, CharacterDetectionStatus] = {}
+const VISIBILITY_BUFFER_TIME: float = 3.0
 
 # Collection of last locations where characters were spotted.
 var last_detection_locations: Dictionary[PlayerCharacter, Vector3] = {}
@@ -16,29 +17,41 @@ func _ready() -> void:
 	raycast.add_exception(self)
 	add_child(raycast)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var overlapping_chars = get_overlapping_bodies().filter(\
 	func(x): return x is PlayerCharacter)
 	
 	# Set detection for overlapping chars if no  obstacles between
 	for _char in overlapping_chars:
-		_set_detection(_char, _is_view_clear(_char))
+		_set_visibility(_char, _is_view_clear(_char), delta)
 	
 	# Set detection for possibly non overlapping chars
 	for _char in detection_status.keys():
 		if _char not in overlapping_chars:
-			_set_detection(_char, false)
+			_set_visibility(_char, false, delta)
 
-func _set_detection(character: PlayerCharacter, detection: bool) -> void:
-	var to_emit: Signal = character_detected if detection else character_undetected
+func _set_visibility(player: PlayerCharacter, visibility: bool, delta: float) -> void:
+	var to_emit: Signal = character_detected if visibility else character_undetected
 	
-	if not detection_status.has(character) or detection_status[character] != detection:
-		detection_status[character] = detection
-		to_emit.emit(character)
+	if not detection_status.has(player):
+		detection_status[player] =  CharacterDetectionStatus.new()
 	
-	# Set last spotted locations
-	if detection:
-		last_detection_locations[character] = character.global_position
+	if detection_status[player].is_visible != visibility:
+		detection_status[player].is_visible = visibility
+		to_emit.emit(player)
+	
+	# Set last spotted location and timer
+	if visibility:
+		detection_status[player].last_seen_timer = 0.0
+	else:
+		detection_status[player].last_seen_timer = clamp(detection_status[player].last_seen_timer + delta, 
+		0.0,
+		VISIBILITY_BUFFER_TIME)
+
+	if detection_status[player].last_seen_timer < VISIBILITY_BUFFER_TIME:
+		detection_status[player].last_seen_location = player.global_position
+
+
 
 # Is the sightline between detector and body clear
 func _is_view_clear(body: PlayerCharacter) -> bool:
@@ -53,3 +66,4 @@ func _is_view_clear(body: PlayerCharacter) -> bool:
 func get_detection_status(body: PlayerCharacter):
 	return detection_status.has(body) and \
 		detection_status[body]
+		

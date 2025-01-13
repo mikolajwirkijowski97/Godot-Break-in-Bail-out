@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://x35mswxgaif3"]
 
-[ext_resource type="Script" path="res://Character/CharacterComponents/ledge_detector_component.gd" id="1_dk5av"]
+[ext_resource type="Script" uid="uid://ci7yvriqrvdwe" path="res://Character/CharacterComponents/ledge_detector_component.gd" id="1_dk5av"]
 
 [node name="LedgeDetector" type="Node3D"]
 script = ExtResource("1_dk5av")

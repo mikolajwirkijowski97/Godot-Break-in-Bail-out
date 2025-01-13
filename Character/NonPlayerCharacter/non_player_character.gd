@@ -73,7 +73,7 @@ func set_navigation_target(target: Vector3) -> void:
 	navigation_agent.target_position = target
 
 
-func guard_area() -> void:
+func guard_area(delta: float) -> void:
 	# Cant really guard shit with no eyes or ears can you?
 	if not character_detector:
 		return
@@ -81,14 +81,34 @@ func guard_area() -> void:
 	# Check if anyone is trespassing
 	for player in character_detector.detection_status:
 		var detection = character_detector.detection_status[player]
-		if detection and player.is_trespassing():
+		if detection and player.is_trespassing(delta ):
 			state_chart.send_event("get_suspicious")
 
-func follow_closest_detected() -> void:
-	pass
+func set_navigation_to_trespassing_detection_point(delta: float) -> void:
+	if not character_detector:
+		return
+
+	var closest_player: PlayerCharacter
+	var closest_distance: float
+
+	for player: PlayerCharacter in character_detector.detection_status.keys():
+		if not player.is_trespassing(delta):
+			continue
+	
+		var detection_location: Vector3 = character_detector.detection_status[player].last_seen_location
+		var distance = (global_position - detection_location).length()
+		
+		if closest_player and closest_distance < distance:
+			continue
+		
+		closest_player = player
+		closest_distance = distance
+	
+	if closest_player:
+		set_navigation_target(character_detector.detection_status[closest_player].last_seen_location)
 
 func _on_ledge_detector_bump_encountered() -> void:
-	velocity.y += 1
+	position.y += 0.3
 
 	
 	

@@ -25,4 +25,4 @@ func _process(_delta: float) -> void:
 		PlayerDeviceManager.handle_join_input()
 
 func _on_ledge_detector_bump_encountered() -> void:
-	position.y += 0.03
+	position.y += 0.1

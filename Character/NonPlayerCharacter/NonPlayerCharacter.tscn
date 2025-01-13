@@ -2652,7 +2652,6 @@ script = ExtResource("5_to6s5")
 
 [node name="LedgeDetector" parent="." instance=ExtResource("3_3fepg")]
 upper_bound = 0.45
-lower_bound = 0.08
 upper_range = 0.5
 lower_range = 0.45
 
