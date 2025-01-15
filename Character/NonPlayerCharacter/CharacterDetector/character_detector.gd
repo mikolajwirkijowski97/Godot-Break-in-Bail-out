@@ -8,9 +8,6 @@ signal character_undetected(_char: PlayerCharacter)
 var detection_status: Dictionary[PlayerCharacter, CharacterDetectionStatus] = {}
 const VISIBILITY_BUFFER_TIME: float = 3.0
 
-# Collection of last locations where characters were spotted.
-var last_detection_locations: Dictionary[PlayerCharacter, Vector3] = {}
-
 var raycast : RayCast3D = RayCast3D.new()
 
 func _ready() -> void:
@@ -24,21 +21,30 @@ func _physics_process(delta: float) -> void:
 	# Set visibility for overlapping chars if no  obstacles between
 	for _char in overlapping_chars:
 		_set_visibility(_char, _is_view_clear(_char), delta)
+		_set_red_handed(_char, delta)
 	
 	# Set detection for possibly non overlapping chars
 	for _char in detection_status.keys():
 		if _char not in overlapping_chars:
 			_set_visibility(_char, false, delta)
 
+func _set_red_handed(player: PlayerCharacter, delta: float):
+	# early return if already set
+	if detection_status[player].caught_red_handed:
+		return
+
+	if detection_status[player].is_visible and is_trespassing(player, delta):
+		detection_status[player].caught_red_handed = true
+
 func get_caught_players():
-	return detection_status.keys().filter(func (x): detection_status[x].caught_red_handed)
+	return detection_status.keys().filter(func (x):return detection_status[x].caught_red_handed)
 
 func _set_visibility(player: PlayerCharacter, visibility: bool, delta: float) -> void:
 	var to_emit: Signal = character_detected if visibility else character_undetected
 	
 	if not detection_status.has(player):
 		detection_status[player] =  CharacterDetectionStatus.new()
-	
+
 	if detection_status[player].is_visible != visibility:
 		detection_status[player].is_visible = visibility
 		to_emit.emit(player)
@@ -55,21 +61,22 @@ func _set_visibility(player: PlayerCharacter, visibility: bool, delta: float) ->
 		detection_status[player].last_seen_location = player.global_position
 
 # Is the sightline between detector and body clear
-func _is_view_clear(body: PlayerCharacter) -> bool:
-	var vertical_offset: Vector3 = Vector3.UP * body.detection_height
-	raycast.target_position = to_local(body.global_position + vertical_offset)
+func _is_view_clear(player: PlayerCharacter) -> bool:
+	var vertical_offset: Vector3 = Vector3.UP * player.detection_height
+	raycast.target_position = to_local(player.global_position + vertical_offset)
 	raycast.force_raycast_update()
 	
 	var collider = raycast.get_collider()
-	return collider == body
+	return collider == player # The first object that hits raycast == player
 
 
-func get_detection_status(body: PlayerCharacter) ->  CharacterDetectionStatus:
-	return detection_status[body] if detection_status.has(body) else null
+func get_detection_status(player: PlayerCharacter) ->  CharacterDetectionStatus:
+	return detection_status[player] if detection_status.has(player) else null
 
 func b_is_visible(player: PlayerCharacter) -> bool:
 	return detection_status[player].is_visible
 
+# It's costly, don't abuse
 func is_trespassing(player: PlayerCharacter, delta: float):
 	var all_areas = get_tree().get_nodes_in_group("Areas")
 	var not_trespassing_timer = detection_status[player].not_trespassing_timer

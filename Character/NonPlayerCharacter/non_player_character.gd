@@ -92,10 +92,7 @@ func follow_trespassers(delta: float) -> void:
 	var closest_player: PlayerCharacter
 	var closest_distance: float
 
-	for player: PlayerCharacter in character_detector.detection_status.keys():
-		if not character_detector.is_trespassing(player, delta):
-			continue
-	
+	for player: PlayerCharacter in character_detector.get_caught_players():
 		var detection_location: Vector3 = character_detector.detection_status[player].last_seen_location
 		var distance = (global_position - detection_location).length()
 		

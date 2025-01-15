@@ -2079,6 +2079,8 @@ transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 0, 0)
 script = ExtResource("1_x3mgj")
 state_chart = NodePath("StateChart")
 character_detector = NodePath("CharacterDetector")
+call_handle_input = null
+detection_height = null
 
 [node name="GravityComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_p3a4u")]
 player = NodePath("..")

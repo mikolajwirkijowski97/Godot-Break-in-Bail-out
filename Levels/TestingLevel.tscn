@@ -36,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8734, 1.9551, -6.86498)
 action_plan = NodePath("ActionPlan")
 npc_type = NodePath("GuardType")
 call_handle_input = false
+detection_height = null
 
 [node name="ActionPlan" type="Node3D" parent="Guard"]
 script = ExtResource("3_wvxjp")
