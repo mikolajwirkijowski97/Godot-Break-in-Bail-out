@@ -12,6 +12,9 @@ class_name Character
 
 signal main_char_position_updated(position)
 
+func _ready():
+	_animation_tree.active = true
+	
 func _physics_process(_delta: float) -> void:
 	if(velocity):
 		main_char_position_updated.emit(global_position)
@@ -22,4 +25,4 @@ func _process(_delta: float) -> void:
 		PlayerDeviceManager.handle_join_input()
 
 func _on_ledge_detector_bump_encountered() -> void:
-	position.y += 0.03
+	position.y += 0.1
