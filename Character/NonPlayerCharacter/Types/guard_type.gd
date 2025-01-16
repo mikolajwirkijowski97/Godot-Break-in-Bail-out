@@ -9,13 +9,11 @@ func on_hostile_update(_npc: NonPlayerCharacter, _delta: float) -> void:
 
 func on_busy_update(_npc: NonPlayerCharacter, _delta: float) -> void:
 	_npc.process_actions(_delta)
-	_npc.guard_area(_delta)
-
+	_npc.guard_area(_delta)	
 
 func on_suspicious_update(_npc: NonPlayerCharacter, _delta: float) -> void:
 	# Warn off the player
 	_npc.follow_trespassers(_delta, trespassing_attention_time)
-	_npc.walk_towards_target(_delta)
 
 func on_alerted_update(_npc: NonPlayerCharacter, _delta: float) -> void:
 	pass

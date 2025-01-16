@@ -15,5 +15,8 @@ func is_finished(_npc: NonPlayerCharacter) -> bool:
 	return false if time == 0.0 else timer >= time
 
 func start_action(npc: NonPlayerCharacter) -> void:
-	npc.set_navigation_target(global_position)
+	var navigation_setup = NavigationSetup.new()
+	navigation_setup.desired_distance = 1.0
+	navigation_setup.navigation_target = global_position
+	npc.setup_navigation(navigation_setup)
 	timer = 0.0

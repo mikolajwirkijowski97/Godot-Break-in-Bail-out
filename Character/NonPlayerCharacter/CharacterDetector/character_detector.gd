@@ -16,7 +16,6 @@ func _ready() -> void:
 	add_child(raycast)
 
 func _process(delta: float) -> void:
-	print(Engine.get_frames_per_second())
 	var overlapping_chars = get_overlapping_bodies().filter(\
 	func(x): return x is PlayerCharacter)
 	

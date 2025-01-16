@@ -2695,9 +2695,10 @@ sliding_speed = 200.0
 path_desired_distance = 0.5
 path_max_distance = 1.01
 simplify_path = true
-simplify_epsilon = 0.36
+simplify_epsilon = 0.1
 height = 2.65
 radius = 1.0
+debug_enabled = true
 
 [connection signal="state_entered" from="StateChart/ParallelState/ActionStates/Busy" to="." method="_on_busy_state_entered"]
 [connection signal="state_processing" from="StateChart/ParallelState/ActionStates/Busy" to="." method="_on_busy_state_processing"]
