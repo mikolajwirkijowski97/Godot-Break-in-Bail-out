@@ -90,12 +90,15 @@ func set_navigation_target_with_cooldown(target: Vector3):
 		navigation_cooldown = Timer.new()
 		navigation_cooldown.wait_time = 0.25
 		navigation_cooldown.one_shot = true
+		add_child(navigation_cooldown)
 		navigation_cooldown.start()
 	
 	if navigation_cooldown.is_stopped():
 		set_navigation_target(target)
+		navigation_cooldown.start()
 	
 func set_navigation_target(target: Vector3) -> void:
+	print_debug("navigation updated")
 	navigation_agent.target_position = target
 
 func setup_navigation(nav_setup: NavigationSetup):
