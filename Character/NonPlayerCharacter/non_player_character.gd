@@ -51,13 +51,13 @@ func start_next_action() -> void:
 	current_action = action_plan.get_next_action() 
 	current_action.start_action(self)
 
-func stop():
-	velocity = Vector3.ZERO
+func stop(delta: float) -> void:
+	const stop_speed = 10
+	velocity = velocity.move_toward(Vector3.ZERO, delta * stop_speed)
 
 func walk_towards_target(delta: float) -> void:
 	if is_target_reached():
-		print("stopping")
-		stop()
+		stop(delta)
 		return
 	# Get the next path position
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
