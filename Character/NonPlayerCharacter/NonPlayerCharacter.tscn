@@ -2079,8 +2079,6 @@ transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 0, 0)
 script = ExtResource("1_x3mgj")
 state_chart = NodePath("StateChart")
 character_detector = NodePath("CharacterDetector")
-call_handle_input = null
-detection_height = null
 
 [node name="GravityComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_p3a4u")]
 player = NodePath("..")
@@ -2649,6 +2647,12 @@ delay_in_seconds = "0.0"
 [node name="Suspicious" type="Node" parent="StateChart/ParallelState/ActionStates"]
 script = ExtResource("5_to6s5")
 
+[node name="To Busy" type="Node" parent="StateChart/ParallelState/ActionStates/Suspicious"]
+script = ExtResource("6_kitmt")
+to = NodePath("../../Busy")
+event = &"get_busy"
+delay_in_seconds = "0.0"
+
 [node name="Alerted" type="Node" parent="StateChart/ParallelState/ActionStates"]
 script = ExtResource("5_to6s5")
 
@@ -2695,6 +2699,7 @@ simplify_epsilon = 0.36
 height = 2.65
 radius = 1.0
 
+[connection signal="state_entered" from="StateChart/ParallelState/ActionStates/Busy" to="." method="_on_busy_state_entered"]
 [connection signal="state_processing" from="StateChart/ParallelState/ActionStates/Busy" to="." method="_on_busy_state_processing"]
 [connection signal="state_processing" from="StateChart/ParallelState/ActionStates/Suspicious" to="." method="_on_suspicious_state_processing"]
 [connection signal="bump_encountered" from="LedgeDetector" to="." method="_on_ledge_detector_bump_encountered"]

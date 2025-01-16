@@ -19,6 +19,10 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
+func _on_busy_state_entered():
+	npc_type.on_busy_started(self)
+
+
 func _on_busy_state_processing(delta: float) -> void:
 	if npc_type:
 		npc_type.on_busy_update(self, delta)
@@ -35,9 +39,14 @@ func process_actions(delta: float) -> void:
 	else:
 		start_next_action()
 
-
+func start_current_action() -> void:
+	if current_action:
+		current_action.start_action(self)
+	else:
+		print_debug("Starting an inexistent action!")
+	
 func start_next_action() -> void:
-	state_chart.send_event("busy")
+	state_chart.send_event(Transitions.GET_BUSY)
 	current_action = action_plan.get_next_action() 
 	current_action.start_action(self)
 
@@ -81,17 +90,24 @@ func guard_area(delta: float) -> void:
 	# Check if anyone is trespassing
 	for player in character_detector.detection_status:
 		var detection: bool = character_detector.b_is_visible(player)
-		var trespassing: bool = character_detector.is_trespassing(player, delta)
+		var trespassing: bool = character_detector.is_trespassing(player)
 		if detection and trespassing:
-			state_chart.send_event("get_suspicious")
+			state_chart.send_event(Transitions.GET_SUS)
 
-func follow_trespassers(delta: float) -> void:
+func conditionally_reset_trespassing_status(player: PlayerCharacter, cutoff: float) -> void:
+	if character_detector.get_not_trespassing_time(player) >= cutoff:
+		character_detector.reset_red_handed_status(player)
+
+func follow_trespassers(delta: float, how_long: float) -> void:
 	if not character_detector:
 		return
 
 	var closest_player: PlayerCharacter
 	var closest_distance: float
-
+	
+	for player in character_detector.get_caught_players():
+		conditionally_reset_trespassing_status(player, how_long)
+		
 	for player: PlayerCharacter in character_detector.get_caught_players():
 		var detection_location: Vector3 = character_detector.detection_status[player].last_seen_location
 		var distance = (global_position - detection_location).length()
@@ -104,9 +120,10 @@ func follow_trespassers(delta: float) -> void:
 	
 	if closest_player:
 		set_navigation_target(character_detector.detection_status[closest_player].last_seen_location)
+	# If no players to follow, get back to normal business
+	else:
+		state_chart.send_event(Transitions.GET_BUSY)
+			
 
 func _on_ledge_detector_bump_encountered() -> void:
 	position.y += 0.3
-
-	
-	
