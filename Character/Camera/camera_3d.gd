@@ -8,4 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	look_at(%MainChar.global_position + 1.5*Vector3.UP, Vector3.UP)

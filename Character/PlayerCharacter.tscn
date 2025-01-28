@@ -2370,6 +2370,7 @@ graph_offset = Vector2(-11, -25)
 script = ExtResource("1_l8wy0")
 
 [node name="MainChar" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 0, 0)
 
 [node name="Armature" type="Node3D" parent="MainChar"]
@@ -2848,7 +2849,7 @@ shape = SubResource("CapsuleShape3D_yyg2q")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 active = false
-root_node = NodePath("../MainChar")
+root_node = NodePath("%MainChar")
 tree_root = SubResource("AnimationNodeStateMachine_aaaej")
 anim_player = NodePath("../MainChar/AnimationPlayer")
 parameters/Movement/blend_position = 0.230888
@@ -2929,13 +2930,16 @@ offset_bottom = -467.0
 initial_node_to_watch = NodePath("../StateChart")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(-0.999994, 0.00349068, -8.36473e-08, 0.0033399, 0.956808, 0.290702, 0.00101483, 0.2907, -0.956814, 0, 2.63837, -2.17165)
-spring_length = 2.0
+transform = Transform3D(-0.999994, 0.00349068, -8.36473e-08, 0.0033399, 0.956808, 0.290702, 0.00101483, 0.2907, -0.956814, 0, 2.14318, -2.17165)
+spring_length = 0.5
+margin = 0.105
 script = ExtResource("9_miyp4")
+follow_speed = 1
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
-transform = Transform3D(1, -2.23517e-08, 5.58794e-09, 0, 1, 2.98023e-08, -2.79397e-09, -5.96046e-08, 1, 0, 0, 0)
+transform = Transform3D(1, 6.46105e-09, 7.21775e-09, -1.36788e-09, 1, -2.98023e-08, -2.85218e-09, -1.49012e-07, 1, 0, 0.034, 0)
 current = true
+fov = 88.7
 script = ExtResource("9_t3uvv")
 
 [node name="LedgeDetector" parent="." instance=ExtResource("11_ss1gi")]
