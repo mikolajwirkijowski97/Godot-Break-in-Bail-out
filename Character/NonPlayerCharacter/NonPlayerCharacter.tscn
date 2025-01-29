@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://p78ar4qsulgi"]
+[gd_scene load_steps=27 format=4 uid="uid://p78ar4qsulgi"]
 
 [ext_resource type="Script" uid="uid://b0r7pkxduditr" path="res://Character/NonPlayerCharacter/non_player_character.gd" id="1_x3mgj"]
 [ext_resource type="Script" uid="uid://gqn6enmexo0w" path="res://addons/godot_state_charts/state_chart.gd" id="2_bk7xy"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://c1kws75xx4bxc" path="res://addons/godot_state_charts/parallel_state.gd" id="3_pmsyy"]
 [ext_resource type="Script" uid="uid://7xytskjk13i4" path="res://addons/godot_state_charts/compound_state.gd" id="4_8c0mm"]
 [ext_resource type="Script" uid="uid://c6p3rh4h7g0bs" path="res://addons/godot_state_charts/atomic_state.gd" id="5_to6s5"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="6_eplwa"]
 [ext_resource type="Script" uid="uid://cx3f8ofpodk5o" path="res://addons/godot_state_charts/transition.gd" id="6_kitmt"]
 [ext_resource type="PackedScene" uid="uid://cj61iyr8f743t" path="res://Character/Debug/navigation_debug_component.tscn" id="10_sbfbr"]
 [ext_resource type="PackedScene" uid="uid://c3oaq425f1ip" path="res://Character/NonPlayerCharacter/CharacterDetector/VisualDetector.tscn" id="11_58bih"]
@@ -2071,7 +2070,7 @@ states/Start/position = Vector2(195, 100)
 transitions = ["Start", "Movement", SubResource("AnimationNodeStateMachineTransition_gsfrk")]
 graph_offset = Vector2(-11, -25)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gsbea"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_58bih"]
 points = PackedVector3Array(0, 0, 0, -48.5581, 0, 12.9294, 0, 0, 50.25, 48.5581, 0, 12.9294, 0, 2, 0, -48.5581, 2, 12.9294, 0, 2, 50.25, 48.5581, 2, 12.9294)
 
 [node name="NonPlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("state_chart", "character_detector")]
@@ -2668,14 +2667,6 @@ tree_root = SubResource("AnimationNodeStateMachine_066pr")
 anim_player = NodePath("../CharacterModel/AnimationPlayer")
 parameters/Movement/blend_position = -1.07751
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("6_eplwa")]
-anchors_preset = -1
-anchor_left = 0.025
-anchor_top = 0.038
-offset_left = 840.2
-offset_top = 455.376
-initial_node_to_watch = NodePath("../StateChart")
-
 [node name="NavigationDebugComponent" parent="." node_paths=PackedStringArray("nav") instance=ExtResource("10_sbfbr")]
 nav = NodePath("../NavigationAgent3D")
 
@@ -2683,7 +2674,7 @@ nav = NodePath("../NavigationAgent3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.240869, 0.0372018, 0.905881)
 
 [node name="VisionTriangle" parent="CharacterDetector" index="0"]
-shape = SubResource("ConvexPolygonShape3D_gsbea")
+shape = SubResource("ConvexPolygonShape3D_58bih")
 angle_deg = 150.18
 distance = 50.25
 
