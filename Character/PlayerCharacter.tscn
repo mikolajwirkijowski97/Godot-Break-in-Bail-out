@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://67jud58vuqlg"]
+[gd_scene load_steps=28 format=4 uid="uid://67jud58vuqlg"]
 
 [ext_resource type="Script" uid="uid://yquqophrbmk8" path="res://Character/player_character.gd" id="1_l8wy0"]
 [ext_resource type="Script" uid="uid://gqn6enmexo0w" path="res://addons/godot_state_charts/state_chart.gd" id="2_qy0rd"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://v4vwfp2l3b4" path="res://Character/Camera/player_camera.gd" id="12_jt7vv"]
 [ext_resource type="PackedScene" uid="uid://dih5g78kdyf1" path="res://Character/CharacterComponents/player_controller_component.tscn" id="12_n3584"]
 [ext_resource type="PackedScene" uid="uid://4j38o8oxa0ty" path="res://Character/CharacterComponents/gravity_component.tscn" id="13_3jkd2"]
-[ext_resource type="Script" uid="uid://deokkok4lcwcg" path="res://Character/CharacterComponents/camera_focus_component.gd" id="14_xtuob"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny5ht"]
 
@@ -2366,10 +2365,11 @@ states/Start/position = Vector2(195, 100)
 transitions = ["Start", "Movement", SubResource("AnimationNodeStateMachineTransition_gsfrk")]
 graph_offset = Vector2(-11, -25)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_l8wy0"]
-radius = 0.05
+[sub_resource type="SphereShape3D" id="SphereShape3D_by2qs"]
+radius = 0.1
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_l8wy0")
 
 [node name="MainChar" type="Node3D" parent="."]
@@ -2943,25 +2943,21 @@ player = NodePath("..")
 
 [node name="PlayerCamera" type="Node3D" parent="." node_paths=PackedStringArray("target", "spring_arm")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15076, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13334, 0)
 script = ExtResource("12_jt7vv")
 target = NodePath("..")
 spring_arm = NodePath("SpringArm3D")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="PlayerCamera"]
-shape = SubResource("SphereShape3D_l8wy0")
+collision_mask = 2
+shape = SubResource("SphereShape3D_by2qs")
 spring_length = 6.0
-margin = 0.1
+margin = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCamera/SpringArm3D"]
 current = true
 fov = 70.4
 script = ExtResource("9_t3uvv")
-
-[node name="CameraFocusComponent" type="Node3D" parent="PlayerCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72504, 0.565779, -0.115801)
-script = ExtResource("14_xtuob")
-metadata/_custom_type_script = ExtResource("14_xtuob")
 
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Idle" to="PlayerController" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Walk" to="PlayerController" method="_on_walk_state_physics_processing"]

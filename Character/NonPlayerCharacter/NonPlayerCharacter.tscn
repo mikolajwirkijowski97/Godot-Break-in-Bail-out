@@ -2075,6 +2075,7 @@ points = PackedVector3Array(0, 0, 0, -48.5581, 0, 12.9294, 0, 0, 50.25, 48.5581,
 
 [node name="NonPlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("state_chart", "character_detector")]
 transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 0, 0)
+collision_mask = 3
 script = ExtResource("1_x3mgj")
 state_chart = NodePath("StateChart")
 character_detector = NodePath("CharacterDetector")

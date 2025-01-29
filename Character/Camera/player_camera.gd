@@ -4,21 +4,22 @@ class_name PlayerCamera
 @export var target: PlayerCharacter
 @export var spring_arm: SpringArm3D
 
-var position_target_offset: Vector3
+var position_offset: Vector3
 var player_controller: PlayerControllerComponent
 const camera_rotation_speed = 0.2
 
 
 func _ready():
+	position_offset = position
 	top_level = true
+	
 	player_controller = get_parent().get_children().filter(
 		func (x): 
-			return x is PlayerControllerComponent)[0]
+			return x is PlayerControllerComponent).front()
 
-	spring_arm.add_excluded_object(target.get_rid())
 
 func _process(delta):
-	global_position = target.global_position
+	global_position = target.global_position + position_offset
 
 # Handle mouse
 func _unhandled_input(event):

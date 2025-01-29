@@ -8,11 +8,13 @@ script = ExtResource("1_dk5av")
 [node name="TestLowerCollision" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.172, 0)
 target_position = Vector3(0, 0, 0.9)
+collision_mask = 2
 debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
 
 [node name="TestHigherCollision" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 target_position = Vector3(0, 0, 1)
+collision_mask = 2
 debug_shape_custom_color = Color(0, 0, 1, 1)
 debug_shape_thickness = 5

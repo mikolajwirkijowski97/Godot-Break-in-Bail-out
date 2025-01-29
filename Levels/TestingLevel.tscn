@@ -61,6 +61,7 @@ navigation_mesh = SubResource("NavigationMesh_l0f7a")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
 use_collision = true
+collision_layer = 2
 
 [node name="Obstacle1" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51076, 1.34024, -3.61858)

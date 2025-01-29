@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BreakInBailOut"
-run/main_scene="res://Levels/TestingLevel.tscn"
+run/main_scene="uid://c2h4vhj1xogft"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
@@ -85,6 +85,11 @@ camera_down={
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Environment"
 
 [navigation]
 
