@@ -119,26 +119,12 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, 0
 operation = 2
 size = Vector3(0.25, 2.5, 1.22)
 
-[node name="ProtoRamp" type="CSGCombiner3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.7, -0.46396, -5)
-script = ExtResource("4_svkyh")
-type = 0
-width = 2.001
-height = 3.001
-depth = 9.001
-anchor = 0
-anchor_fixed = true
-material = null
-metadata/_custom_type_script = ExtResource("4_svkyh")
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.010367, 0, 0.999946, 0, 1, 0, -0.999946, 0, 0.010367, -46.6979, -0.46396, 0)
+polygon = PackedVector2Array(0, 0, 0, 2.945, 7.284, 0.005)
+depth = 2.0
 
-[node name="ProtoRamp" type="CSGCombiner3D" parent="CSGCombiner3D/ProtoRamp"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 23)
-script = ExtResource("4_svkyh")
-type = 0
-width = 2.001
-height = 3.001
-depth = 9.001
-anchor = 0
-anchor_fixed = true
-material = null
-metadata/_custom_type_script = ExtResource("4_svkyh")
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.0103669, 0, -0.999946, 0, 1, 0, 0.999946, 0, -0.0103669, -48.5979, -0.46396, 8)
+polygon = PackedVector2Array(0, 0, 0, 2.945, 7.284, 0.005)
+depth = 2.0

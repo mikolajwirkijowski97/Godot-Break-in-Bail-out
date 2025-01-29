@@ -22,7 +22,7 @@ PlayerDeviceManager="*res://Character/PlayerManager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/multiplayer_input/plugin.cfg", "res://addons/proto_shape/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/multiplayer_input/plugin.cfg")
 
 [global_group]
 
