@@ -13,6 +13,8 @@ var has_device: bool = false
 # physics related
 @export var SPEED = 10.0
 
+func get_camera_y_rotation():
+	return %PlayerCamera.get_y_rotation()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,7 +29,8 @@ func _get_direction_from_input() -> Vector3:
 	MultiplayerInput.get_axis(device, "move_backwards", "move_forward")
 	
 	var direction = Vector3(-dir_x, 0, dir_z).normalized()
-	return direction
+
+	return direction.rotated(Vector3.UP, get_camera_y_rotation()-PI)
 
 func _physics_process(_delta: float) -> void: 
 	# set the velocity in the animation tree, so it can blend between animations

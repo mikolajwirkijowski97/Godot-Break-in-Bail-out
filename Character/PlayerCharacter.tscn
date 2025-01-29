@@ -2942,6 +2942,7 @@ SPEED = 4.0
 player = NodePath("..")
 
 [node name="PlayerCamera" type="Node3D" parent="." node_paths=PackedStringArray("target", "spring_arm")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15076, 0)
 script = ExtResource("12_jt7vv")
 target = NodePath("..")
@@ -2953,7 +2954,6 @@ spring_length = 6.0
 margin = 0.1
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCamera/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 current = true
 fov = 70.4
 script = ExtResource("9_t3uvv")

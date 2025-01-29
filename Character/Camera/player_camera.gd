@@ -53,3 +53,6 @@ func _physics_process(delta):
 		var pitch_dir: float = MultiplayerInput.get_axis(player_controller.device, "camera_down", "camera_up")
 		
 		rotate_camera(yaw_dir*delta, pitch_dir*delta)
+
+func get_y_rotation():
+	return $SpringArm3D.rotation.y

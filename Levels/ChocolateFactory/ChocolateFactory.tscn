@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2h4vhj1xogft"]
+[gd_scene load_steps=8 format=3 uid="uid://c2h4vhj1xogft"]
 
 [ext_resource type="Texture2D" uid="uid://1kflwj0pn23f" path="res://assets/Textures/HDRI/autumn_field_puresky_4k.exr" id="1_8psee"]
 [ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/PlayerCharacter.tscn" id="1_plhlm"]
 [ext_resource type="Material" uid="uid://cfa2fgjnvjpbq" path="res://assets/Materials/Prototyping/DarkGrid.tres" id="2_8psee"]
 [ext_resource type="Script" uid="uid://br5i4474e1p22" path="res://Levels/BaseLevel.gd" id="2_n3a7b"]
-[ext_resource type="Script" uid="uid://0w7ia2qsgn7x" path="res://addons/proto_shape/proto_ramp/proto_ramp.gd" id="4_svkyh"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ytj5d"]
 panorama = ExtResource("1_8psee")
