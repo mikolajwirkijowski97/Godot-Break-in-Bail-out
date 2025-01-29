@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ck7smfpwrumvp"]
+[gd_scene load_steps=13 format=3 uid="uid://ck7smfpwrumvp"]
 
 [ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/PlayerCharacter.tscn" id="1_a5qav"]
+[ext_resource type="Script" uid="uid://br5i4474e1p22" path="res://Levels/BaseLevel.gd" id="1_s8r7n"]
 [ext_resource type="Material" uid="uid://cfa2fgjnvjpbq" path="res://assets/Materials/Prototyping/DarkGrid.tres" id="2_3u2r3"]
 [ext_resource type="PackedScene" uid="uid://p78ar4qsulgi" path="res://Character/NonPlayerCharacter/NonPlayerCharacter.tscn" id="2_cc1l8"]
 [ext_resource type="Script" uid="uid://dx04ogjaku1m6" path="res://Character/NonPlayerCharacter/Actions/action_plan.gd" id="3_wvxjp"]
@@ -27,6 +28,7 @@ size = Vector3(1.93335, 2, 0.97876)
 
 [node name="TestingLevel" type="WorldEnvironment"]
 environment = SubResource("Environment_j2uja")
+script = ExtResource("1_s8r7n")
 
 [node name="PlayerChar" parent="." instance=ExtResource("1_a5qav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4512, -6.87743)
@@ -60,8 +62,15 @@ navigation_mesh = SubResource("NavigationMesh_l0f7a")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
 use_collision = true
 
+[node name="Obstacle1" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51076, 1.34024, -3.61858)
+use_collision = true
+size = Vector3(2.94727, 1.4386, 1)
+material = ExtResource("2_3u2r3")
+
 [node name="Floor" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.98279, 0.235787, 17.5239)
+use_collision = true
 size = Vector3(67, 0.891479, 54.6884)
 material = ExtResource("2_3u2r3")
 
@@ -145,11 +154,6 @@ material = ExtResource("2_3u2r3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.60984, 2.24487, 18.1824)
 operation = 2
 size = Vector3(1.73633, 3.48975, 1.87885)
-material = ExtResource("2_3u2r3")
-
-[node name="Obstacle1" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51076, 1.34024, -3.61858)
-size = Vector3(2.94727, 1.4386, 1)
 material = ExtResource("2_3u2r3")
 
 [node name="WorkersOnlyArea" parent="." groups=["Areas"] instance=ExtResource("6_ncnre")]

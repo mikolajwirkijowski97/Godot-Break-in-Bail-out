@@ -1,4 +1,5 @@
 extends Node3D
+class_name PlayerControllerComponent
 
 @export var player: CharacterBody3D
 @export var animation_tree: AnimationTree
@@ -48,6 +49,7 @@ func walk(direction: Vector3, _delta: float) -> void:
 			player.velocity[i] = move_toward(player.velocity[i], 0, slow_down_speed*_delta)
 
 	var min_velocity_rotation_cutoff: float = 0.2
+
 	if player.velocity.length() > min_velocity_rotation_cutoff:
 		var look_direction = Vector2(player.velocity.z, player.velocity.x)
 		player.rotation.y = rotate_toward(player.rotation.y, \
