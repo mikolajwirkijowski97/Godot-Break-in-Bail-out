@@ -2040,7 +2040,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x5xkn"]
 radius = 0.2
-height = 2.2
+height = 1.9
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_unpgg"]
 animation = &"idle"
