@@ -2674,9 +2674,9 @@ shape = SubResource("ConvexPolygonShape3D_sbfbr")
 angle_deg = 150.18
 distance = 50.25
 
-[node name="BumperComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("12_gsbea")]
-character = NodePath("..")
-sliding_speed = 200.0
+[node name="BumperComponent" parent="." instance=ExtResource("12_gsbea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774293, 0)
+sliding_speed = 20.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.5
