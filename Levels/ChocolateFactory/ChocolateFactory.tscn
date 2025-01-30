@@ -31,7 +31,7 @@ environment = SubResource("Environment_n3a7b")
 script = ExtResource("2_n3a7b")
 
 [node name="NonPlayerCharacter" parent="." node_paths=PackedStringArray("action_plan", "npc_type") instance=ExtResource("3_n3a7b")]
-transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -7, 0, 4)
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 9, 3, 4)
 action_plan = NodePath("ActionPlan")
 npc_type = NodePath("GuardType")
 
@@ -43,7 +43,6 @@ metadata/_custom_type_script = ExtResource("4_qi62i")
 transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -7, 0, 4)
 top_level = true
 script = ExtResource("5_vg34p")
-time = 30.0
 metadata/_custom_type_script = ExtResource("5_vg34p")
 
 [node name="TravelAction" type="Marker3D" parent="NonPlayerCharacter/ActionPlan"]

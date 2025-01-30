@@ -54,12 +54,21 @@ func stop(delta: float) -> void:
 	const stop_speed = 10
 	velocity = velocity.move_toward(Vector3.ZERO, delta * stop_speed)
 
+func refresh_navigation_target() -> void:
+	set_navigation_target(navigation_agent.target_position)
+
 func walk_towards_target(delta: float) -> void:
+	# Get the next path position, needed for pathfinding to work
+	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+
 	if is_target_reached():
+		# TODO: Consider redoing stuff using final position reached, just
+		# leaving a reminder.
+		if navigation_agent.distance_to_target() > navigation_agent.target_desired_distance:
+			refresh_navigation_target()
 		stop(delta)
 		return
-	# Get the next path position
-	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+
 	var direction: Vector3 = (next_path_position - global_position).normalized()
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
@@ -111,6 +120,8 @@ func conditionally_reset_trespassing_status(player: PlayerCharacter, cutoff: flo
 	if character_detector.get_not_trespassing_time(player) >= cutoff:
 		character_detector.reset_red_handed_status(player)
 
+#TODO: Definitely, refactor this later on please, and maybe the whole 
+# of trespassing code while you're at it. 
 func follow_trespassers(delta: float, how_long: float) -> void:
 	if not character_detector:
 		return

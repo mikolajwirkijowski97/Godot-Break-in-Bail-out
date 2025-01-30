@@ -45,7 +45,6 @@ func rotate_camera(yaw_delta: float, pitch_delta: float) -> void:
 
 
 func _physics_process(delta):
-	print(spring_arm.get_hit_length())
 	if player_controller and player_controller.has_device:
 		var device = player_controller.device
 		if device == -1:
