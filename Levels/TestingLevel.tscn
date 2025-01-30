@@ -61,6 +61,7 @@ navigation_mesh = SubResource("NavigationMesh_l0f7a")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
 use_collision = true
+collision_layer = 2
 
 [node name="Obstacle1" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.51076, 1.34024, -3.61858)
@@ -168,7 +169,5 @@ debug_color = Color(1, 0, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14442, 0.499999, -5.38475)
 shape = SubResource("BoxShape3D_ncnre")
 debug_color = Color(1, 0, 0, 1)
-
-[connection signal="main_char_position_updated" from="PlayerChar" to="NavigationRegion3D/CSGCombiner3D/Floor" method="_on_main_char_main_char_position_updated"]
 
 [editable path="WorkersOnlyArea"]

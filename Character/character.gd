@@ -10,19 +10,24 @@ class_name Character
 # The height at which this character receives detection raycasts
 @export var detection_height: float = 1
 
-signal main_char_position_updated(position)
-
 func _ready():
 	_animation_tree.active = true
 	
 func _physics_process(_delta: float) -> void:
-	if(velocity):
-		main_char_position_updated.emit(global_position)
 	move_and_slide()
 
 func _process(_delta: float) -> void:
 	if call_handle_input:
 		PlayerDeviceManager.handle_join_input()
 
-func _on_ledge_detector_bump_encountered() -> void:
-	position.y += 0.1
+func rotate_towards_velocity(delta: float, rotation_speed: float = 1.0) -> void:
+	var min_velocity_rotation_cutoff: float = 0.3
+	if velocity.length() > min_velocity_rotation_cutoff:
+		rotate_towards_direction(velocity, rotation_speed*delta)
+
+
+func rotate_towards_direction(direction: Vector3, delta: float) -> void:
+	const look_towards_speed = 4
+	var flat_direction = Vector2(direction.z, direction.x) 
+	rotation.y = rotate_toward(rotation.y, \
+		flat_direction.angle(), delta*look_towards_speed)

@@ -9,6 +9,9 @@ func on_update(npc: NonPlayerCharacter, _delta:float) -> void:
 	if npc.is_target_reached():
 		if time != 0.0:
 			timer += _delta
+			
+		# If target reached, rotate yourself towards where the action node
+		# is rotated towards.
 		npc.rotate_towards_direction((Vector3.FORWARD.rotated(Vector3.UP, -rotation.y)), _delta)
 
 func is_finished(_npc: NonPlayerCharacter) -> bool:

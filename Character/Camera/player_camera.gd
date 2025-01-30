@@ -4,21 +4,22 @@ class_name PlayerCamera
 @export var target: PlayerCharacter
 @export var spring_arm: SpringArm3D
 
-var position_target_offset: Vector3
+var position_offset: Vector3
 var player_controller: PlayerControllerComponent
 const camera_rotation_speed = 0.2
 
 
 func _ready():
+	position_offset = position
 	top_level = true
+	
 	player_controller = get_parent().get_children().filter(
 		func (x): 
-			return x is PlayerControllerComponent)[0]
+			return x is PlayerControllerComponent).front()
 
-	spring_arm.add_excluded_object(target.get_rid())
 
 func _process(delta):
-	global_position = target.global_position
+	global_position = target.global_position + position_offset
 
 # Handle mouse
 func _unhandled_input(event):
@@ -44,7 +45,6 @@ func rotate_camera(yaw_delta: float, pitch_delta: float) -> void:
 
 
 func _physics_process(delta):
-	print(spring_arm.get_hit_length())
 	if player_controller and player_controller.has_device:
 		var device = player_controller.device
 		if device == -1:
@@ -53,3 +53,6 @@ func _physics_process(delta):
 		var pitch_dir: float = MultiplayerInput.get_axis(player_controller.device, "camera_down", "camera_up")
 		
 		rotate_camera(yaw_dir*delta, pitch_dir*delta)
+
+func get_y_rotation():
+	return $SpringArm3D.rotation.y

@@ -1,5 +1,4 @@
 extends Node3D
-signal bump_encountered()
 
 @export var upper_bound : float
 @export var lower_bound : float
@@ -18,4 +17,4 @@ func _physics_process(_delta) -> void:
 	var higher_test = $TestHigherCollision.is_colliding()
 
 	if lower_test and not higher_test:
-		bump_encountered.emit()
+		get_parent().position.y += 0.2

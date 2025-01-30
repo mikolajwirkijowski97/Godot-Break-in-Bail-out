@@ -13,7 +13,6 @@ var SPEED: float = 2.5
 
 func _physics_process(_delta: float) -> void:
 	# set the velocity in the animation tree, so it can blend between animations
-	#TODO: If animations get more complex, this CANNOT be the default approach
 	if _animation_tree:
 		_animation_tree["parameters/Movement/blend_position"] = \
 		velocity.length() / SPEED - 1
@@ -55,35 +54,30 @@ func stop(delta: float) -> void:
 	const stop_speed = 10
 	velocity = velocity.move_toward(Vector3.ZERO, delta * stop_speed)
 
+func refresh_navigation_target() -> void:
+	set_navigation_target(navigation_agent.target_position)
+
 func walk_towards_target(delta: float) -> void:
+	# Get the next path position, needed for pathfinding to work
+	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+
 	if is_target_reached():
+		# TODO: Consider redoing stuff using final position reached, just
+		# leaving a reminder.
+		if navigation_agent.distance_to_target() > navigation_agent.target_desired_distance:
+			refresh_navigation_target()
 		stop(delta)
 		return
-	# Get the next path position
-	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+
 	var direction: Vector3 = (next_path_position - global_position).normalized()
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
 	
-	_rotate_towards_velocity(delta)
+	rotate_towards_velocity(delta)
 
 
 func is_target_reached() -> bool:
 	return navigation_agent.is_target_reached()
-
-
-func _rotate_towards_velocity(delta: float) -> void:
-	var min_velocity_rotation_cutoff: float = 0.3
-	if velocity.length() > min_velocity_rotation_cutoff:
-		rotate_towards_direction(velocity, delta)
-
-
-func rotate_towards_direction(direction: Vector3, delta: float) -> void:
-	const look_towards_speed = 4
-	var flat_direction = Vector2(direction.z, direction.x) 
-	rotation.y = rotate_toward(rotation.y, \
-		flat_direction.angle(), delta*look_towards_speed)
-
 
 func set_navigation_target_with_cooldown(target: Vector3):
 	if not navigation_cooldown:
@@ -126,6 +120,8 @@ func conditionally_reset_trespassing_status(player: PlayerCharacter, cutoff: flo
 	if character_detector.get_not_trespassing_time(player) >= cutoff:
 		character_detector.reset_red_handed_status(player)
 
+#TODO: Definitely, refactor this later on please, and maybe the whole 
+# of trespassing code while you're at it. 
 func follow_trespassers(delta: float, how_long: float) -> void:
 	if not character_detector:
 		return
@@ -158,6 +154,3 @@ func follow_trespassers(delta: float, how_long: float) -> void:
 	else:
 		state_chart.send_event(Transitions.GET_BUSY)
 			
-
-func _on_ledge_detector_bump_encountered() -> void:
-	position.y += 0.3
