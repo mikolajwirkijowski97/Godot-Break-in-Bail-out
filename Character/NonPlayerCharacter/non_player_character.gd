@@ -158,6 +158,3 @@ func follow_trespassers(delta: float, how_long: float) -> void:
 	else:
 		state_chart.send_event(Transitions.GET_BUSY)
 			
-
-func _on_ledge_detector_bump_encountered() -> void:
-	position.y += 0.3

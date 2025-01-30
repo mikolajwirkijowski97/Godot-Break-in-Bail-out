@@ -2690,6 +2690,5 @@ debug_enabled = true
 [connection signal="state_entered" from="StateChart/ParallelState/ActionStates/Busy" to="." method="_on_busy_state_entered"]
 [connection signal="state_processing" from="StateChart/ParallelState/ActionStates/Busy" to="." method="_on_busy_state_processing"]
 [connection signal="state_processing" from="StateChart/ParallelState/ActionStates/Suspicious" to="." method="_on_suspicious_state_processing"]
-[connection signal="bump_encountered" from="LedgeDetector" to="." method="_on_ledge_detector_bump_encountered"]
 
 [editable path="CharacterDetector"]

@@ -19,7 +19,3 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
 	if call_handle_input:
 		PlayerDeviceManager.handle_join_input()
-
-# TODO: Move this to ledge detector, why is this even here.
-func _on_ledge_detector_bump_encountered() -> void:
-	position.y += 0.1
