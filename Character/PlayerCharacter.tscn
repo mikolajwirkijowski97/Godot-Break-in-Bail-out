@@ -2951,10 +2951,11 @@ spring_arm = NodePath("SpringArm3D")
 [node name="SpringArm3D" type="SpringArm3D" parent="PlayerCamera"]
 collision_mask = 2
 shape = SubResource("SphereShape3D_by2qs")
-spring_length = 6.0
+spring_length = 3.0
 margin = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCamera/SpringArm3D"]
+h_offset = 0.495
 current = true
 fov = 70.4
 script = ExtResource("9_t3uvv")
