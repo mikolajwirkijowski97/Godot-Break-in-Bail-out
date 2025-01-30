@@ -13,7 +13,6 @@ var SPEED: float = 2.5
 
 func _physics_process(_delta: float) -> void:
 	# set the velocity in the animation tree, so it can blend between animations
-	#TODO: If animations get more complex, this CANNOT be the default approach
 	if _animation_tree:
 		_animation_tree["parameters/Movement/blend_position"] = \
 		velocity.length() / SPEED - 1
@@ -65,25 +64,11 @@ func walk_towards_target(delta: float) -> void:
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
 	
-	_rotate_towards_velocity(delta)
+	rotate_towards_velocity(delta)
 
 
 func is_target_reached() -> bool:
 	return navigation_agent.is_target_reached()
-
-
-func _rotate_towards_velocity(delta: float) -> void:
-	var min_velocity_rotation_cutoff: float = 0.3
-	if velocity.length() > min_velocity_rotation_cutoff:
-		rotate_towards_direction(velocity, delta)
-
-
-func rotate_towards_direction(direction: Vector3, delta: float) -> void:
-	const look_towards_speed = 4
-	var flat_direction = Vector2(direction.z, direction.x) 
-	rotation.y = rotate_toward(rotation.y, \
-		flat_direction.angle(), delta*look_towards_speed)
-
 
 func set_navigation_target_with_cooldown(target: Vector3):
 	if not navigation_cooldown:

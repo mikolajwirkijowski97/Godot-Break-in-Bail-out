@@ -1,7 +1,7 @@
 extends Node3D
 class_name PlayerControllerComponent
 
-@export var player: CharacterBody3D
+@export var player: PlayerCharacter
 @export var animation_tree: AnimationTree
 @export var state_chart: StateChart
 
@@ -39,25 +39,14 @@ func _physics_process(_delta: float) -> void:
 		player.velocity.length() / SPEED - 1
 
 func walk(direction: Vector3, _delta: float) -> void:
-	const look_towards_speed = 14
-	const slow_down_speed = 40
-	# Set velocity to walk or slow down
-	# TODO: this can be more neat by using multiplication instead of this weird iteration
-	# TODO: Break up into functions
-	# FIX: Character gets stuck walking sometimes when receiving diagonal input(forward|backward + left|right)
-	for i in 3:
-		if direction[i]:
-			player.velocity[i] = direction[i] * SPEED
-		else:
-			player.velocity[i] = move_toward(player.velocity[i], 0, slow_down_speed*_delta)
+	const LOOK_TOWARDS_SPEED: float = 5.
+	const ACCELERATION: float = 30.
 
-	var min_velocity_rotation_cutoff: float = 0.2
+	player.velocity = player.velocity.move_toward(direction * SPEED, ACCELERATION * _delta)
+	player.rotate_towards_velocity(_delta, LOOK_TOWARDS_SPEED)
 
-	if player.velocity.length() > min_velocity_rotation_cutoff:
-		var look_direction = Vector2(player.velocity.z, player.velocity.x)
-		player.rotation.y = rotate_toward(player.rotation.y, \
-		look_direction.angle(), _delta*look_towards_speed)
-		
+
+
 func on_player_joined(_player: int) -> void:
 	if not has_device and _player == p_id:
 		print_debug("Device: "+str(_player)+" joined")
@@ -73,6 +62,7 @@ func on_player_left(_player: int) -> void:
 func _on_walk_state_physics_processing(delta: float) -> void:
 	var direction: Vector3 = _get_direction_from_input()
 	walk(direction, delta)	
+
 	if not direction and is_zero_approx(player.velocity.x + player.velocity.z)\
 		and state_chart:
 		state_chart.send_event("idle")
