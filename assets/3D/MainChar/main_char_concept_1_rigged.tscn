@@ -191,3 +191,4 @@ bones/23/rotation = Quaternion(0.00560155, 0.999057, 0.0427257, -0.00533881)
 libraries = {
 &"": SubResource("AnimationLibrary_n7cac")
 }
+autoplay = "catwalk_idle_twist_r"

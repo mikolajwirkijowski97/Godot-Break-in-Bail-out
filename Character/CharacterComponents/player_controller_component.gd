@@ -46,6 +46,10 @@ func walk(direction: Vector3, _delta: float) -> void:
 	player.rotate_towards_velocity(_delta, LOOK_TOWARDS_SPEED)
 
 
+func sprint(direction: Vector3, _delta: float) -> void:
+	const SPEED_MULTIPLIER: float = 2.
+
+	walk(direction*SPEED_MULTIPLIER, _delta)
 
 func on_player_joined(_player: int) -> void:
 	if not has_device and _player == p_id:
@@ -61,7 +65,11 @@ func on_player_left(_player: int) -> void:
 # TODO: Create an enumaration for events, they cant just be loose strings like that, that's atrocious
 func _on_walk_state_physics_processing(delta: float) -> void:
 	var direction: Vector3 = _get_direction_from_input()
-	walk(direction, delta)	
+
+	if MultiplayerInput.is_action_pressed(device, "sprint"):
+		sprint(direction, delta)
+	else:
+		walk(direction, delta)
 
 	if not direction and is_zero_approx(player.velocity.x + player.velocity.z)\
 		and state_chart:
