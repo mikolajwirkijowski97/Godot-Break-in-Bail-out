@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://lkeso5vr7yxc"]
+
+[ext_resource type="Script" uid="uid://cfn6ymxarqwao" path="res://Objects/Items/Item.gd" id="1_6yr4i"]
+[ext_resource type="PackedScene" uid="uid://d3o8jqeihpaot" path="res://assets/3D/Weapons/axe_placeholder.tscn" id="2_6yr4i"]
+[ext_resource type="Script" uid="uid://j5gim48ljtqk" path="res://Objects/Items/Types/weapon_type.gd" id="3_jn3ce"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yr4i"]
+size = Vector3(0.205, 0.44, 0.075)
+
+[node name="Axe" type="RigidBody3D" node_paths=PackedStringArray("type")]
+script = ExtResource("1_6yr4i")
+type = NodePath("WeaponType")
+metadata/_custom_type_script = ExtResource("1_6yr4i")
+
+[node name="Axe_Placeholder" parent="." instance=ExtResource("2_6yr4i")]
+
+[node name="WeaponType" type="Node" parent="."]
+script = ExtResource("3_jn3ce")
+metadata/_custom_type_script = ExtResource("3_jn3ce")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0715079, 0.0351123, 0.00814819)
+shape = SubResource("BoxShape3D_6yr4i")

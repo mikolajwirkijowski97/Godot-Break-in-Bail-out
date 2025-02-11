@@ -11,6 +11,7 @@ class_name Character
 @export var detection_height: float = 1
 
 func _ready():
+	add_to_inventory(Item.new())
 	_animation_tree.active = true
 	
 func _physics_process(_delta: float) -> void:
@@ -31,3 +32,17 @@ func rotate_towards_direction(direction: Vector3, delta: float) -> void:
 	var flat_direction = Vector2(direction.z, direction.x) 
 	rotation.y = rotate_toward(rotation.y, \
 		flat_direction.angle(), delta*look_towards_speed)
+
+func get_character_component(component_type: Variant) -> Variant:
+	for node in get_children():
+		if is_instance_of(node, component_type):
+			return node
+	return null
+
+# Add the Item to inventory.
+func add_to_inventory(item: Item) -> void:
+	var inventory: InventoryComponent = get_character_component(InventoryComponent) 
+	if not inventory:
+		return
+	inventory.add_item(item)
+	

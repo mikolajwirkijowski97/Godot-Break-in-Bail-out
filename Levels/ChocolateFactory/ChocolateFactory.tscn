@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2h4vhj1xogft"]
+[gd_scene load_steps=15 format=3 uid="uid://c2h4vhj1xogft"]
 
 [ext_resource type="Texture2D" uid="uid://1kflwj0pn23f" path="res://assets/Textures/HDRI/autumn_field_puresky_4k.exr" id="1_8psee"]
 [ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/PlayerCharacter.tscn" id="1_plhlm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dkmq08aqr1gex" path="res://Character/NonPlayerCharacter/Actions/guard_position_action.gd" id="5_vg34p"]
 [ext_resource type="Script" uid="uid://3r1igm6hulhf" path="res://Character/NonPlayerCharacter/Actions/travel_action.gd" id="6_jq4y4"]
 [ext_resource type="Script" uid="uid://da4oi0p8f2gyj" path="res://Character/NonPlayerCharacter/Types/guard_type.gd" id="7_vg34p"]
+[ext_resource type="PackedScene" uid="uid://lkeso5vr7yxc" path="res://Objects/Items/Weapons/Axe.tscn" id="10_jq4y4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ytj5d"]
 panorama = ExtResource("1_8psee")
@@ -170,3 +171,8 @@ use_collision = true
 collision_layer = 2
 size = Vector3(150, 4, 150)
 material = ExtResource("2_8psee")
+
+[node name="Axe" parent="." instance=ExtResource("10_jq4y4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3, -5)
+collision_layer = 2
+collision_mask = 3
