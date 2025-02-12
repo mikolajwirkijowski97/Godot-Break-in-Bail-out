@@ -16,24 +16,22 @@ func create_label(item: Item):
 		return
 	
 	var new_label = Label3D.new()
+	new_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	item.add_child(new_label)
-	new_label.global_position = item.global_position
+	new_label.global_position = item.global_position + Vector3.UP * 0.1 
+	
+	# Set activation text
 	new_label.text = item.type.activate_text
+	# TODO: Create an input map so that we can append the apropriate button
+	# to the label
 	
 	labeled_items[item] = new_label
 
 func remove_label(item: Item):
-	print(item)
-	print(" vs ")
-	for item_ in labeled_items.keys():
-		print(item_)
-	
 	if not labeled_items.has(item):
 		return
-
 	labeled_items[item].queue_free()
 	labeled_items.erase(item)
-	
 
 func _on_item_detection_body_entered(body: Node3D):
 	if body is not Item:
