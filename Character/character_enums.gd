@@ -9,5 +9,6 @@ const CHARACTER_GROUPS: Dictionary[String, String] = {
 const OBJECT_TYPES: Dictionary[String, String] = {
 	WEAPONS = "Weapons",
 	THROWABLES = "Throwables",
-	HOLDABLES = "Holdables"
+	HOLDABLES = "Holdables",
+	ACTIVATABLES = "Activatables"
 }

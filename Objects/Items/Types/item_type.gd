@@ -2,6 +2,13 @@ extends Node
 class_name ItemType
  
 var item: Item
+var activate_text: String
+
+var action_types = {
+	TAKE = "take",
+	ACTIVATE = "activate",
+	PRESS = "press"
+}
 
 func _init():
 	item = get_parent() 

@@ -8,6 +8,8 @@
 size = Vector3(0.205, 0.44, 0.075)
 
 [node name="Axe" type="RigidBody3D" node_paths=PackedStringArray("type")]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_6yr4i")
 type = NodePath("WeaponType")
 metadata/_custom_type_script = ExtResource("1_6yr4i")

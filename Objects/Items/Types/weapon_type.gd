@@ -1,7 +1,9 @@
 extends ItemType
 class_name WeaponType
 
-
+func _init():
+	super()
+	activate_text = "Take"
 
 # Called when object is interacted with.
 # Returns whether the function is implemented for this item type.
