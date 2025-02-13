@@ -10,16 +10,27 @@ func _ready():
 	item_detection_area.body_entered.connect(_on_item_detection_body_entered)
 	item_detection_area.body_exited.connect(_on_item_detection_body_exited)
 
-
+func _input(event):
+	var parent = get_parent()
+	if parent is not PlayerCharacter \
+	or not parent.player_controller.has_device:
+		return
+	
+	var device = parent.player_controller.device
+	
+	if MultiplayerInput.is_action_just_pressed(device, "activate"):
+		var item: Item = labeled_items.keys()[0]
+		item.type.activate(parent)
+	
+	
 func create_label(item: Item):
 	if labeled_items.has(item):
 		return
 	
-	var new_label = Label3D.new()
-	new_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	var new_label = ItemLabel.new()
 	item.add_child(new_label)
+
 	new_label.global_position = item.global_position + Vector3.UP * 0.1 
-	new_label.fixed_size = true
 	# Set activation text
 	new_label.text = item.type.activate_text
 	# TODO: Create an input map so that we can append the apropriate button

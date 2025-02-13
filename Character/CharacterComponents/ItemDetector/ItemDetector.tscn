@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dp3wxwlycycq7"]
 
-[ext_resource type="Script" uid="uid://dvo1ex5qecwgt" path="res://Character/CharacterComponents/item_detector.gd" id="1_abpx2"]
+[ext_resource type="Script" uid="uid://dvo1ex5qecwgt" path="res://Character/CharacterComponents/ItemDetector/item_detector.gd" id="1_abpx2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_abpx2"]
 radius = 2.5

@@ -2,7 +2,6 @@ extends ItemType
 class_name WeaponType
 
 func _init():
-	super()
 	activate_text = "Take"
 
 # Called when object is interacted with.

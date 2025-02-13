@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://v4vwfp2l3b4" path="res://Character/Camera/player_camera.gd" id="12_jt7vv"]
 [ext_resource type="PackedScene" uid="uid://dih5g78kdyf1" path="res://Character/CharacterComponents/player_controller_component.tscn" id="12_n3584"]
 [ext_resource type="PackedScene" uid="uid://4j38o8oxa0ty" path="res://Character/CharacterComponents/gravity_component.tscn" id="13_3jkd2"]
-[ext_resource type="PackedScene" uid="uid://dp3wxwlycycq7" path="res://Character/CharacterComponents/ItemDetector.tscn" id="14_xtuob"]
+[ext_resource type="PackedScene" uid="uid://dp3wxwlycycq7" path="res://Character/CharacterComponents/ItemDetector/ItemDetector.tscn" id="14_xtuob"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyg2q"]
 radius = 0.4

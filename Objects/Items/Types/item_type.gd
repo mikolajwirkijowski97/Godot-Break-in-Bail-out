@@ -10,7 +10,7 @@ var action_types = {
 	PRESS = "press"
 }
 
-func _init():
+func _ready():
 	item = get_parent() 
 	
 # Called when object is interacted with.
