@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://67jud58vuqlg"]
+[gd_scene load_steps=28 format=3 uid="uid://67jud58vuqlg"]
 
 [ext_resource type="Script" uid="uid://yquqophrbmk8" path="res://Character/player_character.gd" id="1_l8wy0"]
 [ext_resource type="PackedScene" uid="uid://cqk10y7d2w7kb" path="res://assets/3D/MainChar/main_char_concept_1_rigged.tscn" id="2_l8wy0"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dih5g78kdyf1" path="res://Character/CharacterComponents/player_controller_component.tscn" id="12_n3584"]
 [ext_resource type="PackedScene" uid="uid://4j38o8oxa0ty" path="res://Character/CharacterComponents/gravity_component.tscn" id="13_3jkd2"]
 [ext_resource type="PackedScene" uid="uid://dp3wxwlycycq7" path="res://Character/CharacterComponents/ItemDetector/ItemDetector.tscn" id="14_xtuob"]
+[ext_resource type="PackedScene" uid="uid://chokc1fw8pa01" path="res://Character/CharacterComponents/InventoryComponent.tscn" id="15_jt7vv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyg2q"]
 radius = 0.4
@@ -61,7 +62,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_aaaej"]
 states/Movement/node = SubResource("AnimationNodeBlendSpace1D_0y3x7")
-states/Movement/position = Vector2(479, 100)
+states/Movement/position = Vector2(480, 100)
 states/Start/position = Vector2(168, 100)
 transitions = ["Start", "Movement", SubResource("AnimationNodeStateMachineTransition_gsfrk")]
 graph_offset = Vector2(-11, -25)
@@ -69,34 +70,54 @@ graph_offset = Vector2(-11, -25)
 [sub_resource type="SphereShape3D" id="SphereShape3D_by2qs"]
 radius = 0.1
 
-[node name="PlayerCharacter" type="CharacterBody3D"]
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("_animation_tree", "left_hand_attachment", "right_hand_attachment", "head_attachment")]
 collision_mask = 3
 script = ExtResource("1_l8wy0")
+_animation_tree = NodePath("AnimationTree")
+left_hand_attachment = NodePath("MainChar/Skeleton/LeftHandAttachment")
+right_hand_attachment = NodePath("MainChar/Skeleton/RightHandAttachment")
+head_attachment = NodePath("MainChar/Skeleton/HeadAttachment")
 
 [node name="MainChar" parent="." instance=ExtResource("2_l8wy0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
 [node name="Skeleton" parent="MainChar" index="0"]
-bones/0/position = Vector3(-0.00714753, 0.527427, -0.00566385)
-bones/0/rotation = Quaternion(-0.0466313, -0.107661, -0.00878267, 0.993055)
-bones/1/rotation = Quaternion(0.107885, 0.012511, -0.0106394, 0.994028)
-bones/2/rotation = Quaternion(-0.0359441, -0.0705036, 0.00999645, 0.996814)
-bones/3/rotation = Quaternion(-0.0526596, 0.035405, -0.02252, 0.997731)
-bones/4/rotation = Quaternion(0.0995848, -0.00671479, 0.00047116, 0.995006)
-bones/5/rotation = Quaternion(-0.021698, -0.0114361, 0.0270177, 0.999334)
-bones/7/rotation = Quaternion(0.421742, 0.532295, 0.581953, -0.447354)
-bones/8/rotation = Quaternion(-0.0668773, 0.769551, -0.634942, -0.012952)
-bones/9/rotation = Quaternion(0.070379, -0.696105, 0.0768694, 0.710335)
-bones/11/rotation = Quaternion(0.4679, -0.495767, -0.568509, -0.460523)
-bones/12/rotation = Quaternion(0.0174917, 0.771696, -0.634384, 0.0416748)
-bones/13/rotation = Quaternion(0.106904, 0.70007, -0.109743, 0.697445)
-bones/15/rotation = Quaternion(0.184598, -0.0396395, 0.981863, -0.0172719)
-bones/16/rotation = Quaternion(-0.0123089, 0.992321, -0.117762, 0.0357684)
-bones/17/rotation = Quaternion(-0.0184577, 0.624804, -0.780521, 0.00813048)
-bones/18/rotation = Quaternion(0.000802747, 1, 6.73249e-05, -1.26917e-05)
-bones/20/rotation = Quaternion(-0.0811779, 0.0323187, 0.992415, 0.0864807)
-bones/21/rotation = Quaternion(0.0138167, 0.987613, -0.110575, -0.110468)
-bones/22/rotation = Quaternion(0.0535262, 0.701119, -0.70808, -0.0647254)
+bones/0/position = Vector3(0.00606555, 0.501323, -0.0295872)
+bones/0/rotation = Quaternion(0.0895813, -0.0413837, 0.0256203, 0.99479)
+bones/1/rotation = Quaternion(0.134674, 0.0900083, -0.0474215, 0.985653)
+bones/2/rotation = Quaternion(0.0031008, 0.0115093, -0.00362114, 0.999922)
+bones/3/rotation = Quaternion(0.00322746, 0.0115867, -0.00393281, 0.99992)
+bones/4/rotation = Quaternion(0.169323, -0.0104728, -0.0120682, 0.985431)
+bones/5/rotation = Quaternion(-0.200805, -0.0412068, 0.0424982, 0.977841)
+bones/7/rotation = Quaternion(0.477366, 0.487875, 0.589657, -0.431746)
+bones/8/rotation = Quaternion(-0.190914, 0.867327, -0.408254, -0.211245)
+bones/9/rotation = Quaternion(0.416716, -0.588468, 0.416716, 0.553536)
+bones/11/rotation = Quaternion(0.491024, -0.492189, -0.553662, -0.458371)
+bones/12/rotation = Quaternion(-0.191289, 0.867611, -0.395592, -0.232738)
+bones/13/rotation = Quaternion(0.467333, 0.549885, -0.467334, 0.510711)
+bones/15/rotation = Quaternion(0.0737695, 0.394455, 0.907155, -0.126626)
+bones/16/rotation = Quaternion(0.0460349, 0.541289, -0.8394, 0.0171765)
+bones/17/rotation = Quaternion(-0.103641, 0.876831, -0.469495, 0.00087421)
+bones/18/rotation = Quaternion(1.34034e-07, 0.999372, -0.0354453, 2.23699e-08)
+bones/20/rotation = Quaternion(0.0457631, 0.0784461, 0.995859, 0.00415583)
+bones/21/rotation = Quaternion(-0.00274802, 0.932852, -0.360248, -0.00116368)
+bones/22/rotation = Quaternion(-0.0168736, 0.535047, -0.84365, 0.0411783)
+bones/23/rotation = Quaternion(-9.01383e-09, 0.975964, 0.21793, 6.70892e-09)
+
+[node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
+transform = Transform3D(0.453502, 0.237908, 0.858915, 0.879042, 0.0395946, -0.475096, -0.147038, 0.97048, -0.191175, -0.189289, 0.710703, 0.489057)
+bone_name = "RightHand"
+bone_idx = 14
+
+[node name="LeftHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="1"]
+transform = Transform3D(0.396002, 0.193531, -0.897623, -0.133632, -0.954985, -0.264852, -0.908474, 0.224833, -0.352314, 0.342632, 0.538552, -0.011737)
+bone_name = "LeftHand"
+bone_idx = 10
+
+[node name="HeadAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="2"]
+transform = Transform3D(0.999035, 0.00951005, 0.042871, 0.0077104, 0.923113, -0.384451, -0.043231, 0.384411, 0.922149, 0.0291871, 1.00139, 0.204256)
+bone_name = "Head"
+bone_idx = 5
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902801, 0)
@@ -107,7 +128,7 @@ active = false
 root_node = NodePath("../MainChar")
 tree_root = SubResource("AnimationNodeStateMachine_aaaej")
 anim_player = NodePath("../MainChar/AnimationPlayer")
-parameters/Movement/blend_position = -1.00314
+parameters/Movement/blend_position = 0.507064
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_qy0rd")
@@ -215,6 +236,8 @@ fov = 70.4
 script = ExtResource("9_t3uvv")
 
 [node name="ItemDetector" parent="." instance=ExtResource("14_xtuob")]
+
+[node name="InventoryComponent" parent="." instance=ExtResource("15_jt7vv")]
 
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Idle" to="PlayerController" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Walk" to="PlayerController" method="_on_walk_state_physics_processing"]

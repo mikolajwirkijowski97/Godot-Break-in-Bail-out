@@ -2072,11 +2072,12 @@ graph_offset = Vector2(-11, -25)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sbfbr"]
 points = PackedVector3Array(0, 0, 0, -48.5581, 0, 12.9294, 0, 0, 50.25, 48.5581, 0, 12.9294, 0, 2, 0, -48.5581, 2, 12.9294, 0, 2, 50.25, 48.5581, 2, 12.9294)
 
-[node name="NonPlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("state_chart", "character_detector")]
+[node name="NonPlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("state_chart", "character_detector", "_animation_tree")]
 collision_mask = 3
 script = ExtResource("1_x3mgj")
 state_chart = NodePath("StateChart")
 character_detector = NodePath("CharacterDetector")
+_animation_tree = NodePath("AnimationTree")
 
 [node name="GravityComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_p3a4u")]
 player = NodePath("..")

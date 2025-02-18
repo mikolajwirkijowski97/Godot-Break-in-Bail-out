@@ -1,9 +1,13 @@
 extends CharacterBody3D
 class_name Character
 
-@onready var _state_chart: StateChart = $StateChart
-@onready var _animation_tree: AnimationTree = $AnimationTree
-@onready var _animation_state_machine: AnimationNodeStateMachinePlayback = _animation_tree.get("parameters/playback")
+@export var _animation_tree: AnimationTree
+
+# Needed attachments for bones
+@export var left_hand_attachment: BoneAttachment3D
+@export var right_hand_attachment: BoneAttachment3D
+@export var head_attachment: BoneAttachment3D
+
 # Should the character handle the game controls initialisation(use only if no game object does it)
 @export var call_handle_input: bool = true
 
@@ -11,7 +15,6 @@ class_name Character
 @export var detection_height: float = 1
 
 func _ready():
-	add_to_inventory(Item.new())
 	_animation_tree.active = true
 	
 func _physics_process(_delta: float) -> void:
@@ -21,11 +24,11 @@ func _process(_delta: float) -> void:
 	if call_handle_input:
 		PlayerDeviceManager.handle_join_input()
 
+# TODO: Create a separate movement component AND a controller so that AI/Controls and movement are seperate and not here 
 func rotate_towards_velocity(delta: float, rotation_speed: float = 1.0) -> void:
 	var min_velocity_rotation_cutoff: float = 0.3
 	if velocity.length() > min_velocity_rotation_cutoff:
 		rotate_towards_direction(velocity, rotation_speed*delta)
-
 
 func rotate_towards_direction(direction: Vector3, delta: float) -> void:
 	const look_towards_speed = 4
@@ -33,16 +36,9 @@ func rotate_towards_direction(direction: Vector3, delta: float) -> void:
 	rotation.y = rotate_toward(rotation.y, \
 		flat_direction.angle(), delta*look_towards_speed)
 
+# Returns the first instance of a child component of the given class or null
 func get_character_component(component_type: Variant) -> Variant:
 	for node in get_children():
 		if is_instance_of(node, component_type):
 			return node
 	return null
-
-# Add the Item to inventory.
-func add_to_inventory(item: Item) -> void:
-	var inventory: InventoryComponent = get_character_component(InventoryComponent) 
-	if not inventory:
-		return
-	inventory.add_item(item)
-	

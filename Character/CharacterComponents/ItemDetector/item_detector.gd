@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var item_detection_area: Area3D = $ItemDetectionArea
 
-var labeled_items: Dictionary[Item, Label3D]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,38 +19,24 @@ func _input(event):
 	var device = parent.player_controller.device
 	
 	if MultiplayerInput.is_action_just_pressed(device, "activate"):
-		var item: Item = labeled_items.keys()[0]
+		var nearby_items = item_detection_area.get_overlapping_bodies().filter(
+			func (x): 
+				return x is Item 
+				)
+
+		var item: Item = null if nearby_items.is_empty() else nearby_items[0]
 		item.type.activate(parent)
 	
-	
-func create_label(item: Item):
-	if labeled_items.has(item):
-		return
-	
-	var new_label = ItemLabel.new()
-	item.add_child(new_label)
-
-	new_label.global_position = item.global_position + Vector3.UP * 0.1 
-	# Set activation text
-	new_label.text = item.type.activate_text
-	# TODO: Create an input map so that we can append the apropriate button
-	# to the label
-	
-	labeled_items[item] = new_label
-
-func remove_label(item: Item):
-	if not labeled_items.has(item):
-		return
-	labeled_items[item].queue_free()
-	labeled_items.erase(item)
-
-func _on_item_detection_body_entered(body: Node3D):
+func _on_item_detection_body_entered(body: Node3D) -> void:
 	if body is not Item:
 		return
-	create_label(body)
+	var item: Item = body
 	
-func _on_item_detection_body_exited(body: Node3D):
+	item.label.characters_near -= 1
+	
+func _on_item_detection_body_exited(body: Node3D) -> void:
 	if body is not Item:
 		return
-	remove_label(body)
+	var item: Item = body
+	item.label.characters_near += 1
 	

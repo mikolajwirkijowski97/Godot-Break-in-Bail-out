@@ -3,6 +3,7 @@ class_name WeaponType
 
 func _init():
 	activate_text = "Take"
+	itemtype_type = CharacterEnums.OBJECT_TYPES.WEAPONS
 
 # Called when object is interacted with.
 # Returns whether the function is implemented for this item type.
@@ -12,9 +13,15 @@ func activate(actor: Character) -> bool:
 # Called when object is supposed to be picked up.
 # Returns whether the function is implemented for this item type.
 func pick_up(actor: Character) -> bool:
-	actor.add_to_inventory(item)
-	item.freeze = true
-	item.hide()
+	var inventory: InventoryComponent = \
+	actor.get_character_component(InventoryComponent) as InventoryComponent
+	if not inventory:
+		return true
+
+	hide_item()
+	
+	item.reparent(actor.right_hand_attachment)
+	inventory.add_item(item)
 	return true
  
 # Called when object is supposed to be picked up.
