@@ -82,40 +82,20 @@ head_attachment = NodePath("MainChar/Skeleton/HeadAttachment")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
 [node name="Skeleton" parent="MainChar" index="0"]
-bones/0/position = Vector3(-0.0071606, 0.52765, -0.00565751)
-bones/0/rotation = Quaternion(-0.0462923, -0.105467, -0.00710452, 0.993319)
-bones/1/rotation = Quaternion(0.106685, 0.0145274, -0.0099345, 0.994137)
-bones/2/rotation = Quaternion(-0.0352754, -0.0737728, 0.00965589, 0.996604)
-bones/3/rotation = Quaternion(-0.0529306, 0.0387201, -0.0249817, 0.997535)
-bones/4/rotation = Quaternion(0.098066, 0.000171675, 0.000723853, 0.99518)
-bones/5/rotation = Quaternion(-0.0174613, -0.00455032, 0.02949, 0.999402)
-bones/7/rotation = Quaternion(0.422076, 0.532017, 0.581928, -0.447403)
-bones/8/rotation = Quaternion(-0.0651368, 0.770636, -0.633803, -0.0131048)
-bones/9/rotation = Quaternion(0.0703084, -0.690486, 0.0797096, 0.715494)
-bones/11/rotation = Quaternion(0.468059, -0.495633, -0.568486, -0.460535)
-bones/12/rotation = Quaternion(0.0210384, 0.771727, -0.634486, 0.0377037)
-bones/13/rotation = Quaternion(0.107288, 0.697633, -0.107977, 0.700099)
-bones/15/rotation = Quaternion(0.184734, -0.0404907, 0.981843, -0.0147903)
-bones/16/rotation = Quaternion(-0.0125324, 0.992774, -0.114407, 0.0339761)
-bones/17/rotation = Quaternion(-0.0185383, 0.626369, -0.779274, 0.00710676)
-bones/18/rotation = Quaternion(7.35918e-08, 1, 3.71635e-05, 1.75319e-05)
-bones/20/rotation = Quaternion(-0.0811147, 0.0325843, 0.992228, 0.0885546)
-bones/21/rotation = Quaternion(0.0142578, 0.987254, -0.111852, -0.112317)
-bones/22/rotation = Quaternion(0.0542129, 0.700314, -0.708751, -0.0655251)
-bones/23/rotation = Quaternion(1.70254e-07, 1, 7.33435e-05, 1.33044e-05)
+bones/0/position = Vector3(0.0213856, 0.530844, -0.00915566)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
-transform = Transform3D(-0.0396814, -0.194048, 0.980189, 0.200133, -0.962628, -0.182469, 0.978965, 0.188927, 0.0770337, -0.254065, 0.473921, -0.0189715)
+transform = Transform3D(-0.150095, -0.305427, 0.940312, 0.260917, -0.929605, -0.260302, 0.953622, 0.206274, 0.21922, -0.272254, 0.498367, -0.0264067)
 bone_name = "RightHand"
 bone_idx = 14
 
 [node name="LeftHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="1"]
-transform = Transform3D(0.464601, 0.0668085, -0.882996, -0.0959728, -0.987477, -0.125211, -0.880304, 0.142917, -0.452371, 0.218508, 0.449499, 0.0782764)
+transform = Transform3D(0.23207, 0.103398, -0.967188, -0.152601, -0.978151, -0.141186, -0.960654, 0.180359, -0.211221, 0.262963, 0.45632, 0.0655006)
 bone_name = "LeftHand"
 bone_idx = 10
 
 [node name="HeadAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="2"]
-transform = Transform3D(0.963754, -0.0199226, -0.266046, -0.008368, 0.99446, -0.104782, 0.266659, 0.103211, 0.958249, 0.0110764, 1.08834, 0.00463869)
+transform = Transform3D(0.963754, -0.0199226, -0.266046, -0.00836799, 0.99446, -0.104782, 0.266659, 0.103211, 0.958249, 0.0396225, 1.09153, 0.00114055)
 bone_name = "Head"
 bone_idx = 5
 
