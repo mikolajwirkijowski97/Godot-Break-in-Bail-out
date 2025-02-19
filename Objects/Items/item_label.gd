@@ -9,8 +9,10 @@ func _init(parent_item: Item, label_text: String):
 	top_level = true
 	text = label_text
 	billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	fixed_size = true
 	_parent_item = parent_item
+	font_size = 40
+	pixel_size = 0.001
+	fixed_size = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

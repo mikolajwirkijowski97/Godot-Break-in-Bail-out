@@ -82,20 +82,20 @@ head_attachment = NodePath("MainChar/Skeleton/HeadAttachment")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
 [node name="Skeleton" parent="MainChar" index="0"]
-bones/0/position = Vector3(0.0213856, 0.530844, -0.00915566)
+bones/0/position = Vector3(0.0128739, 0.473076, -0.016918)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
-transform = Transform3D(-0.150095, -0.305427, 0.940312, 0.260917, -0.929605, -0.260302, 0.953622, 0.206274, 0.21922, -0.272254, 0.498367, -0.0264067)
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.663257, 0.926573, -0.0362923)
 bone_name = "RightHand"
 bone_idx = 14
 
 [node name="LeftHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="1"]
-transform = Transform3D(0.23207, 0.103398, -0.967188, -0.152601, -0.978151, -0.141186, -0.960654, 0.180359, -0.211221, 0.262963, 0.45632, 0.0655006)
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.689005, 0.926573, -0.0365384)
 bone_name = "LeftHand"
 bone_idx = 10
 
 [node name="HeadAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="2"]
-transform = Transform3D(0.963754, -0.0199226, -0.266046, -0.00836799, 0.99446, -0.104782, 0.266659, 0.103211, 0.958249, 0.0396225, 1.09153, 0.00114055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0128739, 1.03758, -0.025204)
 bone_name = "Head"
 bone_idx = 5
 
@@ -216,6 +216,7 @@ fov = 70.4
 script = ExtResource("9_t3uvv")
 
 [node name="ItemDetector" parent="." instance=ExtResource("14_xtuob")]
+transform = Transform3D(1.015, 0, 0, 0, 1.015, 0, 0, 0, 1.015, 0, 0, 0)
 
 [node name="InventoryComponent" parent="." instance=ExtResource("15_jt7vv")]
 
