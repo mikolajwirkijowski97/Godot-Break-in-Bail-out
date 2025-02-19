@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://67jud58vuqlg"]
+[gd_scene load_steps=28 format=3 uid="uid://67jud58vuqlg"]
 
 [ext_resource type="Script" uid="uid://yquqophrbmk8" path="res://Character/player_character.gd" id="1_l8wy0"]
 [ext_resource type="PackedScene" uid="uid://cqk10y7d2w7kb" path="res://assets/3D/MainChar/main_char_concept_1_rigged.tscn" id="2_l8wy0"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://v4vwfp2l3b4" path="res://Character/Camera/player_camera.gd" id="12_jt7vv"]
 [ext_resource type="PackedScene" uid="uid://dih5g78kdyf1" path="res://Character/CharacterComponents/player_controller_component.tscn" id="12_n3584"]
 [ext_resource type="PackedScene" uid="uid://4j38o8oxa0ty" path="res://Character/CharacterComponents/gravity_component.tscn" id="13_3jkd2"]
+[ext_resource type="PackedScene" uid="uid://dp3wxwlycycq7" path="res://Character/CharacterComponents/ItemDetector/ItemDetector.tscn" id="14_xtuob"]
+[ext_resource type="PackedScene" uid="uid://chokc1fw8pa01" path="res://Character/CharacterComponents/InventoryComponent.tscn" id="15_jt7vv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyg2q"]
 radius = 0.4
@@ -60,7 +62,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_aaaej"]
 states/Movement/node = SubResource("AnimationNodeBlendSpace1D_0y3x7")
-states/Movement/position = Vector2(479, 100)
+states/Movement/position = Vector2(480, 100)
 states/Start/position = Vector2(168, 100)
 transitions = ["Start", "Movement", SubResource("AnimationNodeStateMachineTransition_gsfrk")]
 graph_offset = Vector2(-11, -25)
@@ -68,34 +70,43 @@ graph_offset = Vector2(-11, -25)
 [sub_resource type="SphereShape3D" id="SphereShape3D_by2qs"]
 radius = 0.1
 
-[node name="PlayerCharacter" type="CharacterBody3D"]
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("_animation_tree", "left_hand_attachment", "right_hand_attachment", "head_attachment")]
 collision_mask = 3
 script = ExtResource("1_l8wy0")
+_animation_tree = NodePath("AnimationTree")
+left_hand_attachment = NodePath("MainChar/Skeleton/LeftHandAttachment")
+right_hand_attachment = NodePath("MainChar/Skeleton/RightHandAttachment")
+head_attachment = NodePath("MainChar/Skeleton/HeadAttachment")
 
 [node name="MainChar" parent="." instance=ExtResource("2_l8wy0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
 [node name="Skeleton" parent="MainChar" index="0"]
-bones/0/position = Vector3(-0.00714753, 0.527427, -0.00566385)
-bones/0/rotation = Quaternion(-0.0466313, -0.107661, -0.00878267, 0.993055)
-bones/1/rotation = Quaternion(0.107885, 0.012511, -0.0106394, 0.994028)
-bones/2/rotation = Quaternion(-0.0359441, -0.0705036, 0.00999645, 0.996814)
-bones/3/rotation = Quaternion(-0.0526596, 0.035405, -0.02252, 0.997731)
-bones/4/rotation = Quaternion(0.0995848, -0.00671479, 0.00047116, 0.995006)
-bones/5/rotation = Quaternion(-0.021698, -0.0114361, 0.0270177, 0.999334)
-bones/7/rotation = Quaternion(0.421742, 0.532295, 0.581953, -0.447354)
-bones/8/rotation = Quaternion(-0.0668773, 0.769551, -0.634942, -0.012952)
-bones/9/rotation = Quaternion(0.070379, -0.696105, 0.0768694, 0.710335)
-bones/11/rotation = Quaternion(0.4679, -0.495767, -0.568509, -0.460523)
-bones/12/rotation = Quaternion(0.0174917, 0.771696, -0.634384, 0.0416748)
-bones/13/rotation = Quaternion(0.106904, 0.70007, -0.109743, 0.697445)
-bones/15/rotation = Quaternion(0.184598, -0.0396395, 0.981863, -0.0172719)
-bones/16/rotation = Quaternion(-0.0123089, 0.992321, -0.117762, 0.0357684)
-bones/17/rotation = Quaternion(-0.0184577, 0.624804, -0.780521, 0.00813048)
-bones/18/rotation = Quaternion(0.000802747, 1, 6.73249e-05, -1.26917e-05)
-bones/20/rotation = Quaternion(-0.0811779, 0.0323187, 0.992415, 0.0864807)
-bones/21/rotation = Quaternion(0.0138167, 0.987613, -0.110575, -0.110468)
-bones/22/rotation = Quaternion(0.0535262, 0.701119, -0.70808, -0.0647254)
+bones/0/position = Vector3(-0.00886353, 0.524652, -0.00643606)
+bones/9/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/13/position = Vector3(-0.00724389, 0.234921, -0.00475305)
+bones/13/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/14/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/17/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/19/rotation = Quaternion(-0.00332313, 0.99973, 0.0211823, -0.00898343)
+bones/22/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/24/rotation = Quaternion(0.00340287, 0.999722, 0.0214888, 0.009048)
+
+[node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
+transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.684995, 0.97815, -0.0258103)
+bone_name = "RightHand"
+bone_idx = 14
+
+[node name="LeftHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="1"]
+transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.667268, 0.97815, -0.0260564)
+bone_name = "LeftHand"
+bone_idx = 10
+
+[node name="HeadAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00886353, 1.08915, -0.014722)
+bone_name = "Head"
+bone_idx = 5
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902801, 0)
@@ -106,7 +117,7 @@ active = false
 root_node = NodePath("../MainChar")
 tree_root = SubResource("AnimationNodeStateMachine_aaaej")
 anim_player = NodePath("../MainChar/AnimationPlayer")
-parameters/Movement/blend_position = -1.00314
+parameters/Movement/blend_position = 0.507064
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_qy0rd")
@@ -212,6 +223,11 @@ h_offset = 0.495
 current = true
 fov = 70.4
 script = ExtResource("9_t3uvv")
+
+[node name="ItemDetector" parent="." instance=ExtResource("14_xtuob")]
+transform = Transform3D(1.015, 0, 0, 0, 1.015, 0, 0, 0, 1.015, 0, 0, 0)
+
+[node name="InventoryComponent" parent="." instance=ExtResource("15_jt7vv")]
 
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Idle" to="PlayerController" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Walk" to="PlayerController" method="_on_walk_state_physics_processing"]

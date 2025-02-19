@@ -103,7 +103,6 @@ func setup_navigation_with_cooldown(nav_setup: NavigationSetup):
 	navigation_agent.target_desired_distance = nav_setup.desired_distance
 	set_navigation_target_with_cooldown(nav_setup.navigation_target)
 	
-
 func guard_area(delta: float) -> void:
 	# Cant really guard shit with no eyes or ears can you?
 	if not character_detector:
