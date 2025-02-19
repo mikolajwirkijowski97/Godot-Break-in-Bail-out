@@ -42,9 +42,10 @@ func get_current_item() -> Item:
 func select_item(index: int) -> Item:
 	if inventory[index]:
 		curr_selection = index
+	var selected_item = get_current_item()
 
-	get_current_item().type.equip(component_owner)
-	return get_current_item()
+	selected_item.type.equip(component_owner)
+	return selected_item
 
 
 func next_item() -> Item:

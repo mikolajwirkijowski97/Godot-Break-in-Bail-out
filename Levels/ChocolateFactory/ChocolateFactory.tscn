@@ -176,5 +176,4 @@ size = Vector3(150, 4, 150)
 material = ExtResource("2_8psee")
 
 [node name="Axe" parent="." instance=ExtResource("10_jq4y4")]
-transform = Transform3D(3.405, 0, 0, 0, 3.405, 0, 0, 0, 3.405, 24, 3, -9)
-metadata/_custom_type_script = "uid://cfn6ymxarqwao"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3, -9)

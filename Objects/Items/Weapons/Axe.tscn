@@ -7,19 +7,24 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_6yr4i"]
 size = Vector3(0.205, 0.44, 0.075)
 
-[node name="Axe" type="RigidBody3D" node_paths=PackedStringArray("type")]
+[node name="Axe" type="RigidBody3D" node_paths=PackedStringArray("type", "attachment_point")]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_6yr4i")
 type = NodePath("WeaponType")
+attachment_point = NodePath("AttachmentPoint")
 metadata/_custom_type_script = "uid://cfn6ymxarqwao"
 
 [node name="Axe_Placeholder" parent="." instance=ExtResource("2_6yr4i")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="WeaponType" type="Node" parent="."]
 script = ExtResource("3_jn3ce")
 metadata/_custom_type_script = "uid://j5gim48ljtqk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0715079, 0.0351123, 0.00814819)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.027349, 0.00534631, 0.00814819)
 shape = SubResource("BoxShape3D_6yr4i")
+
+[node name="AttachmentPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161508, -0.080028, 0)

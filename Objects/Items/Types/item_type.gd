@@ -40,7 +40,8 @@ func equip(actor: Character) -> bool:
 	# Free all attachments from r-hand
 	var right_hand_att =  actor.right_hand_attachment
 	# Add to characters r-hand
-	item.position = Vector3.ZERO
+	item.position = -item.attachment_point.position
+	item.rotation = Vector3.ZERO
 	return true
 
 func hide_item():
