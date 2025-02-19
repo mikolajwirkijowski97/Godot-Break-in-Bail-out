@@ -25,7 +25,9 @@ func _input(event):
 				)
 
 		var item: Item = null if nearby_items.is_empty() else nearby_items[0]
-		item.type.activate(parent)
+
+		if item:
+			item.type.activate(parent)
 	
 func _on_item_detection_body_entered(body: Node3D) -> void:
 	if body is not Item:
