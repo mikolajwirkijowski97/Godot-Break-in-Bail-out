@@ -1,6 +1,7 @@
 # Interactions are actions that happen between two players, under certain 
 # conditions
-extends Node
-class_name Interaction
+extends Node3D
+class_name InteractionComponent
 
-func condition()
+@export var piggyback_feet_attachment: Marker3D
+	

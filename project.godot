@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
-PlayerDeviceManager="*res://Character/PlayerManager.gd"
+PlayerDeviceManager="*res://Character/player_manager.gd"
 
 [editor_plugins]
 

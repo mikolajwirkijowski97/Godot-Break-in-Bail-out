@@ -6,6 +6,18 @@ var player_data: Dictionary[PlayerCharacter, Dictionary] = {}
 signal player_joined(player)
 signal player_left(player)
 
+func get_players() -> Array[PlayerCharacter]:
+	return player_data.keys()
+
+
+func get_other_player(caller: PlayerCharacter) -> PlayerCharacter:
+	var not_callers = func (x: PlayerCharacter): 
+			return x != caller
+		
+	return player_data.keys()\
+	.filter(not_callers)\
+	.front()
+
 # Add a player to the list of players
 func register_player(player: PlayerCharacter) -> void:
 	player_data[player] = {}
