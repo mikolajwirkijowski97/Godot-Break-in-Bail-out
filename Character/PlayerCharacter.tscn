@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://67jud58vuqlg"]
+[gd_scene load_steps=27 format=3 uid="uid://67jud58vuqlg"]
 
 [ext_resource type="Script" uid="uid://yquqophrbmk8" path="res://Character/player_character.gd" id="1_l8wy0"]
 [ext_resource type="PackedScene" uid="uid://cqk10y7d2w7kb" path="res://assets/3D/MainChar/main_char_concept_1_rigged.tscn" id="2_l8wy0"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://c1kws75xx4bxc" path="res://addons/godot_state_charts/parallel_state.gd" id="3_kpnpy"]
 [ext_resource type="Script" uid="uid://c6p3rh4h7g0bs" path="res://addons/godot_state_charts/atomic_state.gd" id="4_srxvt"]
 [ext_resource type="Script" uid="uid://cx3f8ofpodk5o" path="res://addons/godot_state_charts/transition.gd" id="5_j7wiv"]
-[ext_resource type="Script" uid="uid://stiovkwapn5f" path="res://addons/godot_state_charts/animation_tree_state.gd" id="8_r3xwd"]
 [ext_resource type="Script" uid="uid://dow4bamj34wmb" path="res://Character/Camera/camera_3d.gd" id="9_t3uvv"]
 [ext_resource type="PackedScene" uid="uid://x35mswxgaif3" path="res://Character/CharacterComponents/ledge_detector_component.tscn" id="11_ss1gi"]
 [ext_resource type="Script" uid="uid://v4vwfp2l3b4" path="res://Character/Camera/player_camera.gd" id="12_jt7vv"]
@@ -174,21 +173,8 @@ to = NodePath("../../Walk")
 event = &"walk"
 delay_in_seconds = "0.0"
 
-[node name="Animation Control" type="Node" parent="StateChart/ParallelState"]
-script = ExtResource("3_hqx13")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateChart/ParallelState/Animation Control"]
-script = ExtResource("8_r3xwd")
-animation_tree = NodePath("../../../../AnimationTree")
-
-[node name="Running" type="Node" parent="StateChart/ParallelState/Animation Control"]
-script = ExtResource("8_r3xwd")
-animation_tree = NodePath("../../../../AnimationTree")
-
-[node name="Walking" type="Node" parent="StateChart/ParallelState/Animation Control"]
-script = ExtResource("8_r3xwd")
-animation_tree = NodePath("../../../../AnimationTree")
+[node name="Piggyback Riding" type="Node" parent="StateChart/ParallelState/Movement"]
+script = ExtResource("4_srxvt")
 
 [node name="LedgeDetector" parent="." instance=ExtResource("11_ss1gi")]
 upper_bound = 0.45

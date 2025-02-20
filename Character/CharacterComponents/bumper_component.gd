@@ -3,8 +3,6 @@ class_name BumperComponent
 
 @export var sliding_speed: float
  
-
-
 func _physics_process(delta):
 	for body in get_overlapping_bodies():
 		if body == get_parent():

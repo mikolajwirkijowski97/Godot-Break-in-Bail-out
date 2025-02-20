@@ -26,17 +26,11 @@ func _get_direction_from_input() -> Vector3:
 	
 	var dir_x: float = 0.0 if not has_device else \
 	MultiplayerInput.get_axis(device, "move_left","move_right") 
-	if device == -1 and dir_x > 0.1:
-		pass
+
 	var dir_z: float = 0.0 if not has_device else \
 	MultiplayerInput.get_axis(device, "move_backwards", "move_forward")
 	
 	var direction = Vector3(-dir_x, 0, dir_z).normalized()
-
-	if direction != Vector3.ZERO:
-		print("Device: "+str(device)+" is moving")
-	else:
-		print("Device: "+str(device)+" not_moving")
 	return direction.rotated(Vector3.UP, get_camera_y_rotation()-PI)
 
 func _physics_process(_delta: float) -> void: 
@@ -55,7 +49,6 @@ func walk(direction: Vector3, _delta: float) -> void:
 
 func sprint(direction: Vector3, _delta: float) -> void:
 	const SPEED_MULTIPLIER: float = 2.
-
 	walk(direction*SPEED_MULTIPLIER, _delta)
 
 func on_player_joined(_player: int) -> void:
