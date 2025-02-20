@@ -18,7 +18,7 @@ stretch = true
 
 [node name="SubViewport1" type="SubViewport" parent="SubViewportContainer1"]
 handle_input_locally = false
-size = Vector2i(574, 648)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="PlayerCharacter" parent="SubViewportContainer1/SubViewport1" instance=ExtResource("1_sy3eb")]
@@ -31,9 +31,10 @@ stretch = true
 
 [node name="SubViewport2" type="SubViewport" parent="SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(574, 648)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="PlayerCharacter2" parent="SubViewportContainer2/SubViewport2" instance=ExtResource("1_sy3eb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.51897, 0, 0)
+player_id = 1
 call_handle_input = false

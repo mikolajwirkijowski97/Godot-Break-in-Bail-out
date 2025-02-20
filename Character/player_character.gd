@@ -4,3 +4,8 @@ class_name PlayerCharacter
  
 @onready var player_controller: PlayerControllerComponent = $PlayerController
 @onready var inventory: InventoryComponent
+@export var player_id: int = 0
+
+func _ready():
+	super()
+	player_controller.p_id = player_id

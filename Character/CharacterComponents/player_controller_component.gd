@@ -7,7 +7,8 @@ class_name PlayerControllerComponent
 
 # Player device members
 var device: int
-@export var p_id: int
+# TODO: Set this p_id when smn joins
+var p_id: int
 var has_device: bool = false
 
 # physics related
@@ -22,14 +23,20 @@ func _ready() -> void:
 	PlayerDeviceManager.player_left.connect(on_player_left)
 	
 func _get_direction_from_input() -> Vector3:
+	
 	var dir_x: float = 0.0 if not has_device else \
 	MultiplayerInput.get_axis(device, "move_left","move_right") 
-	
+	if device == -1 and dir_x > 0.1:
+		pass
 	var dir_z: float = 0.0 if not has_device else \
 	MultiplayerInput.get_axis(device, "move_backwards", "move_forward")
 	
 	var direction = Vector3(-dir_x, 0, dir_z).normalized()
 
+	if direction != Vector3.ZERO:
+		print("Device: "+str(device)+" is moving")
+	else:
+		print("Device: "+str(device)+" not_moving")
 	return direction.rotated(Vector3.UP, get_camera_y_rotation()-PI)
 
 func _physics_process(_delta: float) -> void: 

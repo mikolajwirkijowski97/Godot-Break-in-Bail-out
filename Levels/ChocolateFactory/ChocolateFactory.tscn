@@ -34,6 +34,15 @@ script = ExtResource("2_n3a7b")
 
 [node name="MainCharacterSplitScreen" parent="." instance=ExtResource("3_jq4y4")]
 
+[node name="SubViewport1" parent="MainCharacterSplitScreen/SubViewportContainer1" index="0"]
+size = Vector2i(2, 2)
+
+[node name="PlayerCharacter" parent="MainCharacterSplitScreen/SubViewportContainer1/SubViewport1" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="SubViewport2" parent="MainCharacterSplitScreen/SubViewportContainer2" index="0"]
+size = Vector2i(2, 2)
+
 [node name="NonPlayerCharacter" parent="." node_paths=PackedStringArray("action_plan", "npc_type") instance=ExtResource("3_n3a7b")]
 transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 9, 3, 4)
 action_plan = NodePath("ActionPlan")
@@ -176,3 +185,5 @@ material = ExtResource("2_8psee")
 
 [node name="Axe" parent="." instance=ExtResource("10_jq4y4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3, -9)
+
+[editable path="MainCharacterSplitScreen"]

@@ -22,11 +22,12 @@ func handle_join_input() -> void:
 		if MultiplayerInput.is_action_just_pressed(device, "join"):
 			join(device)
 			
-			
+
 func get_unjoined_devices() -> Array[int]:
 	var devices = Input.get_connected_joypads()
 	# also consider keyboard player
-	devices.append(-1)
+	# NOT^ for now, don't even consider keyboard
+	# devices.append(-1)
 	
 	# filter out devices that are joined:
 	return devices.filter(func(device): return !is_device_joined(device))
