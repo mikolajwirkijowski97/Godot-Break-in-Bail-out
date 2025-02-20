@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://67jud58vuqlg"]
+[gd_scene load_steps=28 format=3 uid="uid://67jud58vuqlg"]
 
 [ext_resource type="Script" uid="uid://yquqophrbmk8" path="res://Character/player_character.gd" id="1_l8wy0"]
 [ext_resource type="PackedScene" uid="uid://cqk10y7d2w7kb" path="res://assets/3D/MainChar/main_char_concept_1_rigged.tscn" id="2_l8wy0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dih5g78kdyf1" path="res://Character/CharacterComponents/player_controller_component.tscn" id="12_n3584"]
 [ext_resource type="PackedScene" uid="uid://4j38o8oxa0ty" path="res://Character/CharacterComponents/gravity_component.tscn" id="13_3jkd2"]
 [ext_resource type="PackedScene" uid="uid://dp3wxwlycycq7" path="res://Character/CharacterComponents/ItemDetector/ItemDetector.tscn" id="14_xtuob"]
+[ext_resource type="Script" uid="uid://cxwus4g2p6n2a" path="res://Character/CharacterComponents/PlayerInteractions/player_interaction_component.gd" id="15_3u1fh"]
 [ext_resource type="PackedScene" uid="uid://chokc1fw8pa01" path="res://Character/CharacterComponents/InventoryComponent.tscn" id="15_jt7vv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyg2q"]
@@ -82,15 +83,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
 [node name="Skeleton" parent="MainChar" index="0"]
 bones/0/position = Vector3(-0.00886353, 0.524652, -0.00643606)
-bones/9/rotation = Quaternion(0, -0.707107, 0, 0.707107)
-bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
 bones/13/position = Vector3(-0.00724389, 0.234921, -0.00475305)
-bones/13/rotation = Quaternion(0, 0.707107, 0, 0.707107)
-bones/14/rotation = Quaternion(0, -0.707107, 0, 0.707107)
-bones/17/rotation = Quaternion(0, 0.707107, -0.707107, 0)
-bones/19/rotation = Quaternion(-0.00332313, 0.99973, 0.0211823, -0.00898343)
-bones/22/rotation = Quaternion(0, 0.707107, -0.707107, 0)
-bones/24/rotation = Quaternion(0.00340287, 0.999722, 0.0214888, 0.00904801)
+bones/24/rotation = Quaternion(0.00340287, 0.999722, 0.0214888, 0.009048)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.684995, 0.97815, -0.0258103)
@@ -106,6 +100,14 @@ bone_idx = 10
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00886353, 1.08915, -0.014722)
 bone_name = "Head"
 bone_idx = 5
+
+[node name="NeckAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00886353, 1.00857, -0.0213845)
+bone_name = "Neck"
+bone_idx = 4
+
+[node name="PiggyBackFootStool" type="Marker3D" parent="MainChar/Skeleton/NeckAttachment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.112251)
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902801, 0)
@@ -214,6 +216,11 @@ script = ExtResource("9_t3uvv")
 transform = Transform3D(1.015, 0, 0, 0, 1.015, 0, 0, 0, 1.015, 0, 0, 0)
 
 [node name="InventoryComponent" parent="." instance=ExtResource("15_jt7vv")]
+
+[node name="InteractionComponent" type="Node3D" parent="." node_paths=PackedStringArray("piggyback_feet_attachment")]
+script = ExtResource("15_3u1fh")
+piggyback_feet_attachment = NodePath("../MainChar/Skeleton/NeckAttachment/PiggyBackFootStool")
+metadata/_custom_type_script = "uid://cxwus4g2p6n2a"
 
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Idle" to="PlayerController" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Walk" to="PlayerController" method="_on_walk_state_physics_processing"]
