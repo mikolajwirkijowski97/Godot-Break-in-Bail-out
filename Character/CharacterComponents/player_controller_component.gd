@@ -51,15 +51,15 @@ func sprint(direction: Vector3, _delta: float) -> void:
 	const SPEED_MULTIPLIER: float = 2.
 	walk(direction*SPEED_MULTIPLIER, _delta)
 
-func on_player_joined(_player: int) -> void:
-	if not has_device and _player == p_id:
+func on_player_joined(_player: PlayerCharacter) -> void:
+	if not has_device and _player == player:
 		print_debug("Device: "+str(_player)+" joined")
 		has_device = true
 		device = PlayerDeviceManager.get_player_device(_player)
 
-func on_player_left(_player: int) -> void:
+func on_player_left(_player: PlayerCharacter) -> void:
 	print_debug("Device: "+str(_player)+" left")
-	if _player == p_id:
+	if _player == player:
 		has_device = false
 
 # TODO: Create an enumaration for events, they cant just be loose strings like that, that's atrocious

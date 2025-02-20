@@ -9,3 +9,4 @@ class_name PlayerCharacter
 func _ready():
 	super()
 	player_controller.p_id = player_id
+	PlayerDeviceManager.register_player(self)
