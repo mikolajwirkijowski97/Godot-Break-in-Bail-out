@@ -81,11 +81,6 @@ head_attachment = NodePath("MainChar/Skeleton/HeadAttachment")
 [node name="MainChar" parent="." instance=ExtResource("2_l8wy0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
-[node name="Skeleton" parent="MainChar" index="0"]
-bones/0/position = Vector3(-0.00886353, 0.524652, -0.00643606)
-bones/13/position = Vector3(-0.00724389, 0.234921, -0.00475305)
-bones/24/rotation = Quaternion(0.00340287, 0.999722, 0.0214888, 0.009048)
-
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.684995, 0.97815, -0.0258103)
 bone_name = "RightHand"
