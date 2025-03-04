@@ -20,8 +20,9 @@ func _condition_filled() -> bool:
 func do() -> void:
 	if _condition_filled():
 		started = true
+		_on_start()
 
-func _action() -> void:
+func _on_start() -> void:
 	pass
 
 func is_finished() -> bool:

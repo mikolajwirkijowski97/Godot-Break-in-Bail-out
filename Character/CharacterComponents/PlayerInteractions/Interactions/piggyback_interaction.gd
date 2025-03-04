@@ -21,19 +21,18 @@ func _process(delta: float) -> void:
 		timer += delta
 		initiator.global_position = curve.sample_baked(timer * JUMP_SPEED)
 	if is_finished():
+		initiator.state_chart.send_event("piggybackriding")
 		queue_free()
 
 func _condition_filled() -> bool:
 	var distance = initiator.global_position\
 	.distance_to(PlayerDeviceManager.get_other_player(initiator).global_position)
 
-	return distance < MAX_DISTANCE and \
-	sightline_clear_between_players()
+	return distance < MAX_DISTANCE and sightline_clear_between_players()
 
 func is_finished() -> bool:
 	var distance_traveled = timer * JUMP_SPEED
 	return distance_traveled >= curve.get_baked_length()
 
-func _action() -> void:
+func _on_start() -> void:
 	pass
-	

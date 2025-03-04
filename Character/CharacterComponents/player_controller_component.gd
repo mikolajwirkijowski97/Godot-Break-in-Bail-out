@@ -3,7 +3,6 @@ class_name PlayerControllerComponent
 
 @export var player: PlayerCharacter
 @export var animation_tree: AnimationTree
-@export var state_chart: StateChart
 
 # Player device members
 var device: int
@@ -71,11 +70,10 @@ func _on_walk_state_physics_processing(delta: float) -> void:
 	else:
 		walk(direction, delta)
 
-	if not direction and is_zero_approx(player.velocity.x + player.velocity.z)\
-		and state_chart:
-		state_chart.send_event("idle")
+	if not direction and is_zero_approx(player.velocity.x + player.velocity.z):
+		player.state_chart.send_event("idle")
 
 func _on_idle_state_physics_processing(_delta: float) -> void:
 	if _get_direction_from_input() != Vector3.ZERO:
-		state_chart.send_event("walk")
+		player.state_chart.send_event("walk")
 		

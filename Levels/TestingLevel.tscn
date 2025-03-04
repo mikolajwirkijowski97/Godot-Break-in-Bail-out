@@ -47,11 +47,11 @@ transform = Transform3D(0.317849, 0, 0.258982, 0, 0.41, 0, -0.258982, 0, 0.31784
 top_level = true
 gizmo_extents = 2.36
 script = ExtResource("5_ncnre")
-metadata/_custom_type_script = ExtResource("5_ncnre")
+metadata/_custom_type_script = "uid://dkmq08aqr1gex"
 
 [node name="GuardType" type="Node" parent="Guard"]
 script = ExtResource("5_1dcsj")
-metadata/_custom_type_script = ExtResource("5_1dcsj")
+metadata/_custom_type_script = "uid://da4oi0p8f2gyj"
 
 [node name="Sunlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00547546, -0.835539, 0.549404, 0.00832673, 0.549431, 0.835498, -0.99995, -3.58056e-09, 0.00996569, 25.0481, 16.8892, 0)
