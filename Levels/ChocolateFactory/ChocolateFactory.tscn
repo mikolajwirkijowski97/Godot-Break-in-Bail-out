@@ -34,15 +34,9 @@ script = ExtResource("2_n3a7b")
 
 [node name="MainCharacterSplitScreen" parent="." instance=ExtResource("3_jq4y4")]
 
-[node name="SubViewport1" parent="MainCharacterSplitScreen/SubViewportContainer1" index="0"]
-size = Vector2i(574, 648)
-
 [node name="PlayerCharacter" parent="MainCharacterSplitScreen/SubViewportContainer1/SubViewport1" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 visible = true
-
-[node name="SubViewport2" parent="MainCharacterSplitScreen/SubViewportContainer2" index="0"]
-size = Vector2i(574, 648)
 
 [node name="PlayerCharacter2" parent="MainCharacterSplitScreen/SubViewportContainer2/SubViewport2" index="0"]
 visible = true

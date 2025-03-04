@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
 PlayerDeviceManager="*res://Character/player_manager.gd"
 
+[dotnet]
+
+project/assembly_name="BreakInBailOut"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/mixamo_animation_retargeter/plugin.cfg", "res://addons/multiplayer_input/plugin.cfg")

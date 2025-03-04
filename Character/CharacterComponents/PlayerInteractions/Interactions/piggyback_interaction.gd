@@ -1,6 +1,7 @@
 extends Interaction
 class_name PiggybackInteraction
 
+const HEIGHT_FACTOR: float = 0.5
 const JUMP_SPEED: float = 8.0
 const MAX_DISTANCE: float = 6.0
 const ANIMATION_TIME: float = 1.0
@@ -11,15 +12,21 @@ func _init(initiator_: PlayerCharacter):
 	super(initiator_)
 	curve = Curve3D.new()
 	
-	var height = (initiator.position - receiver.position).length()
+	var height = (initiator.position - receiver.position).length() * HEIGHT_FACTOR
 	var height_offset_vector = Vector3(0.0, height, 0.0)
+
 	curve.add_point(initiator.global_position, Vector3.ZERO,  height_offset_vector)
 	curve.add_point(receiver.global_position, height_offset_vector, Vector3.ZERO)
 
 func _process(delta: float) -> void:
 	if started:
 		timer += delta
-		initiator.global_position = curve.sample_baked(timer * JUMP_SPEED)
+		var linear_distance = timer * JUMP_SPEED
+		var total_distance = curve.get_baked_length()
+		var ease_factor = ease(linear_distance/total_distance, 0.4)
+		
+		initiator.global_position = curve.sample_baked(linear_distance*ease_factor)
+
 	if is_finished():
 		initiator.state_chart.send_event("piggybackriding")
 		queue_free()
