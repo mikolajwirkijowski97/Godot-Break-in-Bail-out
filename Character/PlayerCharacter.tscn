@@ -7,13 +7,13 @@
 [ext_resource type="Script" uid="uid://c1kws75xx4bxc" path="res://addons/godot_state_charts/parallel_state.gd" id="3_kpnpy"]
 [ext_resource type="Script" uid="uid://c6p3rh4h7g0bs" path="res://addons/godot_state_charts/atomic_state.gd" id="4_srxvt"]
 [ext_resource type="Script" uid="uid://cx3f8ofpodk5o" path="res://addons/godot_state_charts/transition.gd" id="5_j7wiv"]
-[ext_resource type="Script" uid="uid://stiovkwapn5f" path="res://addons/godot_state_charts/animation_tree_state.gd" id="8_r3xwd"]
 [ext_resource type="Script" uid="uid://dow4bamj34wmb" path="res://Character/Camera/camera_3d.gd" id="9_t3uvv"]
 [ext_resource type="PackedScene" uid="uid://x35mswxgaif3" path="res://Character/CharacterComponents/ledge_detector_component.tscn" id="11_ss1gi"]
 [ext_resource type="Script" uid="uid://v4vwfp2l3b4" path="res://Character/Camera/player_camera.gd" id="12_jt7vv"]
 [ext_resource type="PackedScene" uid="uid://dih5g78kdyf1" path="res://Character/CharacterComponents/player_controller_component.tscn" id="12_n3584"]
 [ext_resource type="PackedScene" uid="uid://4j38o8oxa0ty" path="res://Character/CharacterComponents/gravity_component.tscn" id="13_3jkd2"]
 [ext_resource type="PackedScene" uid="uid://dp3wxwlycycq7" path="res://Character/CharacterComponents/ItemDetector/ItemDetector.tscn" id="14_xtuob"]
+[ext_resource type="Script" uid="uid://cxwus4g2p6n2a" path="res://Character/CharacterComponents/PlayerInteractions/player_interaction_component.gd" id="15_3u1fh"]
 [ext_resource type="PackedScene" uid="uid://chokc1fw8pa01" path="res://Character/CharacterComponents/InventoryComponent.tscn" id="15_jt7vv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yyg2q"]
@@ -71,6 +71,7 @@ graph_offset = Vector2(-11, -25)
 radius = 0.1
 
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("_animation_tree", "left_hand_attachment", "right_hand_attachment", "head_attachment")]
+visible = false
 collision_mask = 3
 script = ExtResource("1_l8wy0")
 _animation_tree = NodePath("AnimationTree")
@@ -83,15 +84,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0874341, 0)
 
 [node name="Skeleton" parent="MainChar" index="0"]
 bones/0/position = Vector3(-0.00886353, 0.524652, -0.00643606)
+bones/1/position = Vector3(0, 0.0967836, -0.00298969)
+bones/2/position = Vector3(0, 0.112915, -0.00348796)
+bones/3/position = Vector3(1.32349e-23, 0.129046, -0.00398625)
+bones/4/position = Vector3(0, 0.145176, -0.00448453)
+bones/5/position = Vector3(1.32349e-23, 0.0805794, 0.00666247)
+bones/6/position = Vector3(0, 0.787334, 0.0650983)
+bones/7/position = Vector3(0.0536041, 0.131925, -0.00295031)
+bones/8/position = Vector3(0.00306844, 0.107603, -0.0281373)
+bones/9/position = Vector3(0.00884037, 0.234921, -0.00475308)
 bones/9/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/10/position = Vector3(-0.00621313, 0.280004, -0.000434205)
 bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/11/position = Vector3(-0.0536041, 0.131925, -0.00318912)
+bones/12/position = Vector3(-0.00259082, 0.107603, -0.0281373)
 bones/13/position = Vector3(-0.00724389, 0.234921, -0.00475305)
 bones/13/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/14/position = Vector3(0.00621308, 0.280004, -0.00106818)
 bones/14/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/15/position = Vector3(0.0917361, -0.0537091, -0.00108103)
+bones/16/position = Vector3(-0.0166002, 0.228669, 0.0363403)
+bones/17/position = Vector3(0.000212491, 0.208951, 0.0363966)
 bones/17/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/18/position = Vector3(-0.000159453, 0.0951177, -0.0464405)
+bones/19/position = Vector3(-0.000301366, 0.0480674, 0.00204056)
 bones/19/rotation = Quaternion(-0.00332313, 0.99973, 0.0211823, -0.00898343)
+bones/20/position = Vector3(-0.0917361, -0.0537091, 0.00539419)
+bones/21/position = Vector3(0.0166002, 0.228669, 0.0119023)
+bones/22/position = Vector3(-0.000215081, 0.208967, 0.0189642)
 bones/22/rotation = Quaternion(0, 0.707107, -0.707107, 0)
-bones/24/rotation = Quaternion(0.00340287, 0.999722, 0.0214888, 0.009048)
+bones/23/position = Vector3(0.000158026, 0.0938318, -0.0464147)
+bones/24/position = Vector3(0.000302268, 0.0470744, 0.0020274)
+bones/24/rotation = Quaternion(0.00340287, 0.999722, 0.0214888, 0.00904802)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="0"]
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.684995, 0.97815, -0.0258103)
@@ -107,6 +131,14 @@ bone_idx = 10
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00886353, 1.08915, -0.014722)
 bone_name = "Head"
 bone_idx = 5
+
+[node name="NeckAttachment" type="BoneAttachment3D" parent="MainChar/Skeleton" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00886353, 1.00857, -0.0213845)
+bone_name = "Neck"
+bone_idx = 4
+
+[node name="PiggyBackFootStool" type="Marker3D" parent="MainChar/Skeleton/NeckAttachment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.112251)
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.902801, 0)
@@ -144,6 +176,12 @@ to = NodePath("../../Run")
 event = &"run"
 delay_in_seconds = "0.0"
 
+[node name="To Piggyback Riding" type="Node" parent="StateChart/ParallelState/Movement/Idle"]
+script = ExtResource("5_j7wiv")
+to = NodePath("../../Piggyback Riding")
+event = &"piggybackriding"
+delay_in_seconds = "0.0"
+
 [node name="Walk" type="Node" parent="StateChart/ParallelState/Movement"]
 script = ExtResource("4_srxvt")
 
@@ -157,6 +195,12 @@ delay_in_seconds = "0.0"
 script = ExtResource("5_j7wiv")
 to = NodePath("../../Run")
 event = &"run"
+delay_in_seconds = "0.0"
+
+[node name="To Piggyback Riding" type="Node" parent="StateChart/ParallelState/Movement/Walk"]
+script = ExtResource("5_j7wiv")
+to = NodePath("../../Piggyback Riding")
+event = &"piggybackriding"
 delay_in_seconds = "0.0"
 
 [node name="Run" type="Node" parent="StateChart/ParallelState/Movement"]
@@ -174,21 +218,14 @@ to = NodePath("../../Walk")
 event = &"walk"
 delay_in_seconds = "0.0"
 
-[node name="Animation Control" type="Node" parent="StateChart/ParallelState"]
-script = ExtResource("3_hqx13")
-initial_state = NodePath("Idle")
+[node name="To Piggyback Riding" type="Node" parent="StateChart/ParallelState/Movement/Run"]
+script = ExtResource("5_j7wiv")
+to = NodePath("../../Piggyback Riding")
+event = &"piggybackriding"
+delay_in_seconds = "0.0"
 
-[node name="Idle" type="Node" parent="StateChart/ParallelState/Animation Control"]
-script = ExtResource("8_r3xwd")
-animation_tree = NodePath("../../../../AnimationTree")
-
-[node name="Running" type="Node" parent="StateChart/ParallelState/Animation Control"]
-script = ExtResource("8_r3xwd")
-animation_tree = NodePath("../../../../AnimationTree")
-
-[node name="Walking" type="Node" parent="StateChart/ParallelState/Animation Control"]
-script = ExtResource("8_r3xwd")
-animation_tree = NodePath("../../../../AnimationTree")
+[node name="Piggyback Riding" type="Node" parent="StateChart/ParallelState/Movement"]
+script = ExtResource("4_srxvt")
 
 [node name="LedgeDetector" parent="." instance=ExtResource("11_ss1gi")]
 upper_bound = 0.45
@@ -196,10 +233,9 @@ lower_bound = 0.08
 upper_range = 0.5
 lower_range = 0.45
 
-[node name="PlayerController" parent="." node_paths=PackedStringArray("player", "animation_tree", "state_chart") instance=ExtResource("12_n3584")]
+[node name="PlayerController" parent="." node_paths=PackedStringArray("player", "animation_tree") instance=ExtResource("12_n3584")]
 player = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
-state_chart = NodePath("../StateChart")
 SPEED = 4.0
 
 [node name="GravityComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("13_3jkd2")]
@@ -228,6 +264,11 @@ script = ExtResource("9_t3uvv")
 transform = Transform3D(1.015, 0, 0, 0, 1.015, 0, 0, 0, 1.015, 0, 0, 0)
 
 [node name="InventoryComponent" parent="." instance=ExtResource("15_jt7vv")]
+
+[node name="InteractionComponent" type="Node3D" parent="." node_paths=PackedStringArray("piggyback_feet_attachment")]
+script = ExtResource("15_3u1fh")
+piggyback_feet_attachment = NodePath("../MainChar/Skeleton/NeckAttachment/PiggyBackFootStool")
+metadata/_custom_type_script = "uid://cxwus4g2p6n2a"
 
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Idle" to="PlayerController" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/Movement/Walk" to="PlayerController" method="_on_walk_state_physics_processing"]

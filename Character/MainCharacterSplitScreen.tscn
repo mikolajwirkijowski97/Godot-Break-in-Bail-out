@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwnmw4ielr37p"]
+
+[ext_resource type="PackedScene" uid="uid://67jud58vuqlg" path="res://Character/PlayerCharacter.tscn" id="1_sy3eb"]
+
+[node name="MainCharacterSplitScreen" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="SubViewportContainer1" type="SubViewportContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport1" type="SubViewport" parent="SubViewportContainer1"]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="PlayerCharacter" parent="SubViewportContainer1/SubViewport1" instance=ExtResource("1_sy3eb")]
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport2" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="PlayerCharacter2" parent="SubViewportContainer2/SubViewport2" instance=ExtResource("1_sy3eb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.51897, 0, 0)
+player_id = 1
+call_handle_input = false
