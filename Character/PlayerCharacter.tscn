@@ -238,8 +238,8 @@ player = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 SPEED = 4.0
 
-[node name="GravityComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("13_3jkd2")]
-player = NodePath("..")
+[node name="GravityComponent" parent="." node_paths=PackedStringArray("ComponentOwner") instance=ExtResource("13_3jkd2")]
+ComponentOwner = NodePath("..")
 
 [node name="PlayerCamera" type="Node3D" parent="." node_paths=PackedStringArray("target", "spring_arm")]
 unique_name_in_owner = true

@@ -2079,8 +2079,8 @@ state_chart = NodePath("StateChart")
 character_detector = NodePath("CharacterDetector")
 _animation_tree = NodePath("AnimationTree")
 
-[node name="GravityComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_p3a4u")]
-player = NodePath("..")
+[node name="GravityComponent" parent="." node_paths=PackedStringArray("ComponentOwner") instance=ExtResource("2_p3a4u")]
+ComponentOwner = NodePath("..")
 
 [node name="CharacterModel" type="Node3D" parent="."]
 transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, 0, 0, 0)
@@ -2675,9 +2675,9 @@ shape = SubResource("ConvexPolygonShape3D_sbfbr")
 angle_deg = 150.18
 distance = 50.25
 
-[node name="BumperComponent" parent="." instance=ExtResource("12_gsbea")]
+[node name="BumperComponent" parent="." node_paths=PackedStringArray("ComponentOwner") instance=ExtResource("12_gsbea")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774293, 0)
-sliding_speed = 20.0
+ComponentOwner = NodePath("..")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.5
